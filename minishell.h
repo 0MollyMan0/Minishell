@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 10:04:04 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/20 10:36:16 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ void	setup_signals(void);
 
 // --- Parsing --- //
 char	*read_input();
+
+void	exit_minish(void);
 
 #endif

@@ -31,6 +31,7 @@ WHITE       = \033[0;37m
 # SOURCES
 # ----------------------------------
 SRCS    = minishell.c \
+		exit.c \
 		$(PARS_DIR)read_input.c \
 		$(PARS_DIR)signals.c \
 
