@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 11:49:59 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 11:57:38 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/20 13:58:28 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,12 @@ char	*ft_strndup(const char *s, int start, int end)
 	}
 	res[i] = '\0';
 	return (res);
+}
+
+int	ft_isspace(const char c)
+{
+	if ( c == ' ' || (c > 10 && c < 14))
+		return (1);
+	else
+		return (0);
 }

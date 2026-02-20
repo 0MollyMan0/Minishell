@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 12:04:12 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:03:19 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	print_tokens(t_token *tokens)
 			printf("REDIR_IN");
 		else if (tokens->type == TOKEN_REDIR_OUT)
 			printf("REDIR_OUT");
+		else if (tokens->type == TOKEN_APPEND)
+			printf("APPEND");
+		else if (tokens->type == TOKEN_HEREDOC)
+			printf("HEREDOC");
 		printf(" : [%s]\n", tokens->value);
 		tokens = tokens->next;
 	}
@@ -43,7 +47,6 @@ int main(void)
 		if (!input)
 			break ;
 		add_history(input);
-		printf("You typed: %s\n", input);
 		tokens = tokenize(input);
 		print_tokens(tokens);
 		free(input);

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 12:03:01 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/20 12:36:51 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ typedef enum e_token_type
 	TOKEN_WORD,
 	TOKEN_PIPE,
 	TOKEN_REDIR_IN,
-	TOKEN_REDIR_OUT
+	TOKEN_REDIR_OUT,
+	TOKEN_HEREDOC,
+	TOKEN_APPEND
 }	t_token_type;
 
 typedef struct s_token
@@ -42,6 +44,7 @@ typedef struct s_token
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_strndup(const char *s, int start, int end);
+int		ft_isspace(const char c);
 
 // --- Signals --- //
 void	handle_sigint(int sig);
