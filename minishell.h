@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 10:36:16 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/20 12:03:01 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,35 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef struct s_parsing
+typedef enum e_token_type
 {
-	
-}	t_parsing;
+	TOKEN_WORD,
+	TOKEN_PIPE,
+	TOKEN_REDIR_IN,
+	TOKEN_REDIR_OUT
+}	t_token_type;
 
+typedef struct s_token
+{
+	t_token_type	type;
+	char			*value;
+	struct s_token	*next;
+}	t_token;
+
+
+// --- Utils --- //
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s);
+char	*ft_strndup(const char *s, int start, int end);
 
 // --- Signals --- //
 void	handle_sigint(int sig);
 void	setup_signals(void);
 
-// --- Parsing --- //
+// --- Prepare Input --- //
 char	*read_input();
+t_token	*tokenize(const char *input);
+
 
 void	exit_minish(void);
 

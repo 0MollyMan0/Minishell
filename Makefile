@@ -11,7 +11,8 @@ CCFLAGS= -Wall -Wextra -Werror -g -I ./
 # ----------------------------------
 # PATH
 # ----------------------------------
-PARS_DIR	= parsing/
+PARS_DIR	= prepare_input
+UTILS_DIR	= utils
 OBJ_DIR    = obj
 
 # ----------------------------------
@@ -32,8 +33,10 @@ WHITE       = \033[0;37m
 # ----------------------------------
 SRCS    = minishell.c \
 		exit.c \
-		$(PARS_DIR)read_input.c \
-		$(PARS_DIR)signals.c \
+		$(PARS_DIR)/read_input.c \
+		$(PARS_DIR)/signals.c \
+		$(UTILS_DIR)/utils_libft.c \
+
 
 OBJS    = $(SRCS:.c=.o)
 

@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_libft.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/20 11:49:59 by anfouger          #+#    #+#             */
+/*   Updated: 2026/02/20 11:57:38 by anfouger         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <minishell.h>
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(const char *s)
+{
+	int		i;
+	char	*res;
+
+	i = ft_strlen(s);
+	res = malloc((i + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		res[i] = s[i];
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
+}
+
+char	*ft_strndup(const char *s, int start, int end)
+{
+	int		i;
+	char	*res;
+
+	i = end - (start - 1);
+	res = malloc((i + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (start <= end)
+	{
+		res[i] = s[start];
+		start++;
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
+}
