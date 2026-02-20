@@ -6,13 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 11:14:29 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 14:00:02 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:29:30 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static t_token *new_token(t_token_type type, const char *value)
+static t_token *new_token(t_token_type type, char *value, int is_strndup)
 {
 	t_token	*token;
 
@@ -25,6 +25,8 @@ static t_token *new_token(t_token_type type, const char *value)
 	else
 		token->value = NULL;
 	token->next = NULL;
+	if (is_strndup)
+		free(value);
 	return (token);
 }
 
@@ -51,21 +53,21 @@ static int	tokenize_arrow(const char *input, size_t i, t_token **tokens)
 	{
 		if (input[i + 1] == '>')
 		{
-			add_token(&(*tokens), new_token(TOKEN_APPEND, ">>"));
+			add_token(&(*tokens), new_token(TOKEN_APPEND, ">>", 0));
 			i++;
 		}
 		else
-			add_token(&(*tokens), new_token(TOKEN_REDIR_OUT, ">"));
+			add_token(&(*tokens), new_token(TOKEN_REDIR_OUT, ">", 0));
 	}
 	else
 	{
 		if (input[i + 1] == '<')
 		{
-			add_token(&(*tokens), new_token(TOKEN_HEREDOC, "<<"));
+			add_token(&(*tokens), new_token(TOKEN_HEREDOC, "<<", 0));
 			i++;
 		}
 		else
-			add_token(&(*tokens), new_token(TOKEN_REDIR_IN, "<"));
+			add_token(&(*tokens), new_token(TOKEN_REDIR_IN, "<", 0));
 	}
 	i++;
 	return (i);
@@ -75,7 +77,7 @@ static int	tokenize_word(const char *input, size_t i, t_token **tokens)
 {
 	size_t	start;
 	char	quote;
-	
+
 	start = i;
 	quote = 0;
 	while (input[i])
@@ -94,7 +96,7 @@ static int	tokenize_word(const char *input, size_t i, t_token **tokens)
 		i++;
 	}
 	add_token(&(*tokens),
-		new_token(TOKEN_WORD, ft_strndup(input, start, i)));
+		new_token(TOKEN_WORD, ft_strndup(input, start, i - 1), 1));
 	return (i);
 }
 
@@ -111,7 +113,7 @@ t_token *tokenize(const char *input)
 			i++;
 		else if (input[i] == '|')
 		{
-			add_token(&tokens, new_token(TOKEN_PIPE, "|"));
+			add_token(&tokens, new_token(TOKEN_PIPE, "|", 0));
 			i++;
 		}
 		else if (input[i] == '>' || input[i] == '<')

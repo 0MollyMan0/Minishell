@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 14:03:19 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:17:29 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int main(void)
 		add_history(input);
 		tokens = tokenize(input);
 		print_tokens(tokens);
-		free(input);
+		free_command(input, tokens);
 	}
 	exit_minish();
 	return (0);

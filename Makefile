@@ -36,6 +36,7 @@ SRCS    = minishell.c \
 		$(PARS_DIR)/read_input.c \
 		$(PARS_DIR)/signals.c \
 		$(PARS_DIR)/tokenize.c \
+		$(PARS_DIR)/free_command.c \
 		$(UTILS_DIR)/utils_libft.c \
 
 
