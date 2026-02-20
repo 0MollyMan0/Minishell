@@ -1,20 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_parsing.c                                     :+:      :+:    :+:   */
+/*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/12 13:36:45 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 08:22:02 by anfouger         ###   ########.fr       */
+/*   Created: 2026/02/20 09:13:12 by anfouger          #+#    #+#             */
+/*   Updated: 2026/02/20 09:19:56 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_parsing main_parsing(int ac, char **av)
+int read_input()
 {
-	t_parsing *parsing;
-	parsing	= malloc(sizeof(t_parsing));
-	
+	char *input;
+
+	while (1)
+	{
+		input = readline("minishell$ ");
+
+		if (!input)
+		{
+			printf("exit\n");
+			break ;
+		}
+		if (input[0] == '\0')
+		{
+			free(input);
+			continue ;
+		}
+		add_history(input);
+		printf("You typed: %s\n", input);
+		free(input);
+	}
+	return (0);
 }
