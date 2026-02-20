@@ -32,6 +32,7 @@ WHITE       = \033[0;37m
 # ----------------------------------
 SRCS    = minishell.c \
 		$(PARS_DIR)read_input.c \
+		$(PARS_DIR)signals.c \
 
 OBJS    = $(SRCS:.c=.o)
 

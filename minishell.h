@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 09:17:21 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/20 10:04:04 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ typedef struct s_parsing
 }	t_parsing;
 
 
+// --- Signals --- //
+void	handle_sigint(int sig);
+void	setup_signals(void);
+
 // --- Parsing --- //
-int	read_input();
+char	*read_input();
 
 #endif

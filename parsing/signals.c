@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/20 09:13:12 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 10:03:51 by anfouger         ###   ########.fr       */
+/*   Created: 2026/02/20 09:55:28 by anfouger          #+#    #+#             */
+/*   Updated: 2026/02/20 09:55:50 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*read_input()
+void	handle_sigint(int sig)
 {
-	char	*input;
+	(void)sig;
 
-	input = readline("minishell$ ");
-	return (input);
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	setup_signals(void)
+{
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);	
 }
