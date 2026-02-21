@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 14:17:29 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 08:40:49 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int main(void)
 {
 	char *input;
 	t_token *tokens;
+	t_cmd	*cmds;
 	
 	setup_signals();
 
@@ -49,6 +50,7 @@ int main(void)
 		add_history(input);
 		tokens = tokenize(input);
 		print_tokens(tokens);
+		cmds = parser(tokens);
 		free_command(input, tokens);
 	}
 	exit_minish();

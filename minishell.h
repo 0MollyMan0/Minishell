@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 08:34:23 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 09:26:52 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_redir
+{
+	int				type;
+	char			*filename;
+	struct s_redir	*next;
+}	t_redir;
+
+typedef struct s_cmd
+{
+	char			**argv;
+	t_redir			*redirs;
+	int				has_pipe;
+	struct s_cmd	*next;
+}	t_cmd;
 
 // --- Utils Libft --- //
 size_t	ft_strlen(const char *s);
@@ -47,8 +61,14 @@ char	*ft_strndup(const char *s, int start, int end);
 int		ft_isspace(const char c);
 
 // --- Utils Token --- //
-void add_token(t_token **lst, t_token *new);
-t_token *new_token(t_token_type type, char *value, int is_strndup);
+void	add_token(t_token **lst, t_token *new);
+t_token	*new_token(t_token_type type, char *value, int is_strndup);
+
+// --- Utils Cmd --- //
+t_cmd	*new_cmd(void);
+void	add_cmd(t_cmd **lst, t_cmd *new);
+void	add_arg(t_cmd *cmd, char *value);
+void	add_redir(t_cmd *cmd, t_token_type type, char *filename);
 
 // --- Signals --- //
 void	handle_sigint(int sig);
