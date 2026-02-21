@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 08:41:11 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 11:40:50 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 13:33:34 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ static int	verif_syntax(t_token *tokens)
 
 t_cmd	*parser(t_token *tokens)
 {
-	t_cmd *cmds = NULL;
+	t_cmd *cmds;
 	t_cmd *current;
 
+	cmds = NULL;
 	if(!verif_syntax(tokens))
 		return (syntax_error(cmds));
 	while (tokens)

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 10:33:07 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 10:35:51 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:21:22 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	exit_minish(void)
 {
-	printf("exit\n");	
+	printf("exit\n");
 }
