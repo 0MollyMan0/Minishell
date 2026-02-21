@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:11:42 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 14:24:42 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:35:21 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,8 @@ void	free_cmds(t_cmd *cmds)
 		next_cmd = cmds->next;
 		cmds->next = NULL;
 		free_tab(cmds->argv);
-		if (!cmds->redirs)
-			printf("there is not redirs\n");
 		while (cmds->redirs)
 		{
-			printf("there is a redirs\n");
 			next_redir = cmds->redirs->next;
 			cmds->redirs->next = NULL;
 			free(cmds->redirs->filename);

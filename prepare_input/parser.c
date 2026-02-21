@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 08:41:11 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 14:24:14 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:45:10 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,18 @@ static int	verif_syntax(t_token *tokens)
 	return (i);
 }
 
+static t_token	*create_command(t_token *tokens, t_cmd *current)
+{
+	if (tokens->type == TOKEN_WORD)
+		add_arg(current, tokens->value);
+	else if (is_redir(tokens->type))
+	{
+		add_redir(current, tokens->type, tokens->next->value);
+		tokens = tokens->next;
+	}
+	return (tokens->next);
+}
+
 t_cmd	*parser(t_token *tokens)
 {
 	t_cmd	*cmds;
@@ -71,14 +83,7 @@ t_cmd	*parser(t_token *tokens)
 			return (NULL);
 		while (tokens && tokens->type != TOKEN_PIPE)
 		{
-			if (tokens->type == TOKEN_WORD)
-				add_arg(current, tokens->value);
-			else if (is_redir(tokens->type))
-			{
-				add_redir(current, tokens->type, tokens->next->value);
-				tokens = tokens->next;
-			}
-			tokens = tokens->next;
+			tokens = create_command(tokens, current);
 		}
 		add_cmd(&cmds, current);
 		if (tokens && tokens->type == TOKEN_PIPE)
