@@ -6,19 +6,19 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 08:41:23 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 09:25:30 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 11:42:56 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static char	**cpy_tab_str(const char **tab, int i)
+static char	**cpy_tab_str(char **tab, int size)
 {
 	int		i;
 	char	**cpy_tab;
 	
 	i = 0;
-	cpy_tab = malloc(sizeof(char *) * (i + 2));
+	cpy_tab = malloc(sizeof(char *) * (size + 2));
 	if (tab)
 	{
 		while (tab[i])

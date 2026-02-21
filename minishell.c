@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 08:40:49 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 12:34:40 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,42 @@ void	print_tokens(t_token *tokens)
 	}
 }
 
+void	print_redir(t_redir *redir)
+{
+	printf("|	redir\n");
+	if (redir->type == TOKEN_REDIR_IN)
+		printf("	|	type = REDIR_IN\n");
+	else if (redir->type == TOKEN_REDIR_OUT)
+		printf("	|	type = REDIR_OUT\n");
+	else if (redir->type == TOKEN_APPEND)
+		printf("	|	type = APPEND\n");
+	else if (redir->type == TOKEN_HEREDOC)
+		printf("	|	type = HEREDOC\n");
+	printf("	|	filename = [%s]\n", redir->filename);
+}
+
+void	print_cmds(t_cmd *cmds)
+{
+	while (cmds)
+	{
+		int i = 0;
+		printf("command:\n");
+		printf("|	argv : [");
+		while (cmds->argv[i])
+		{
+			printf("%s, ", cmds->argv[i]);
+			i++;
+		}
+		printf("NULL]\n");
+		while  (cmds->redirs)
+		{
+			print_redir(cmds->redirs);
+			cmds->redirs = cmds->redirs->next;
+		}
+		cmds = cmds->next;
+	}
+}
+
 int main(void)
 {
 	char *input;
@@ -51,7 +87,8 @@ int main(void)
 		tokens = tokenize(input);
 		print_tokens(tokens);
 		cmds = parser(tokens);
-		free_command(input, tokens);
+		print_cmds(cmds);
+		free_all(input, tokens, cmds);
 	}
 	exit_minish();
 	return (0);
