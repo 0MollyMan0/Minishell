@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 14:17:22 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 08:34:23 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,15 @@ typedef struct s_token
 }	t_token;
 
 
-// --- Utils --- //
+// --- Utils Libft --- //
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_strndup(const char *s, int start, int end);
 int		ft_isspace(const char c);
+
+// --- Utils Token --- //
+void add_token(t_token **lst, t_token *new);
+t_token *new_token(t_token_type type, char *value, int is_strndup);
 
 // --- Signals --- //
 void	handle_sigint(int sig);
