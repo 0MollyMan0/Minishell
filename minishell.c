@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 14:20:07 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:26:38 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,13 @@ void	print_cmds(t_cmd *cmds)
 	}
 }
 
-int main(void)
+int	main(void)
 {
-	char *input;
-	t_token *tokens;
+	char	*input;
+	t_token	*tokens;
 	t_cmd	*cmds;
 	
 	setup_signals();
-
 	while (1)
 	{
 		input = read_input();

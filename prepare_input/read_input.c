@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:13:12 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/20 15:29:39 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:22:38 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ static int	is_empty(const char *str)
 	return (1);
 }
 
-char	*read_input()
+char	*read_input(void)
 {
 	char	*input;
 	int		i;
 
-	i  = 0;
+	i = 0;
 	while (i < 1)
 	{
 		input = readline("minishell$ ");
 		if (!input)
-			break ;	
+			break ;
 		if (is_empty(input) || !verif_quotes(input))
 		{
 			free(input);

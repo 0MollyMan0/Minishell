@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 11:41:33 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:22:07 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	handle_sigint(int sig);
 void	setup_signals(void);
 
 // --- Prepare Input --- //
-char	*read_input();
+char	*read_input(void);
 t_token	*tokenize(const char *input);
 void	free_all(char *input, t_token *tokens, t_cmd *cmds);
 t_cmd	*parser(t_token *tokens);

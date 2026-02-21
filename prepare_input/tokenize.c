@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 11:14:29 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 08:33:08 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:23:40 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ static int	tokenize_word(const char *input, size_t i, t_token **tokens)
 	while (input[i])
 	{
 		if (!quote && (isspace(input[i]) || input[i] == '|'
-			|| input[i] == '<' || input[i] == '>'))
-			break;
-
+				|| input[i] == '<' || input[i] == '>'))
+			break ;
 		if (input[i] == '\'' || input[i] == '"')
 		{
 			if (!quote)
@@ -65,7 +64,7 @@ static int	tokenize_word(const char *input, size_t i, t_token **tokens)
 	return (i);
 }
 
-t_token *tokenize(const char *input)
+t_token	*tokenize(const char *input)
 {
 	t_token	*tokens;
 	size_t	i;

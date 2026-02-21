@@ -6,13 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 08:33:24 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 08:33:38 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:25:25 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_token *new_token(t_token_type type, char *value, int is_strndup)
+t_token	*new_token(t_token_type type, char *value, int is_strndup)
 {
 	t_token	*token;
 
@@ -30,16 +30,16 @@ t_token *new_token(t_token_type type, char *value, int is_strndup)
 	return (token);
 }
 
-void add_token(t_token **lst, t_token *new)
+void	add_token(t_token **lst, t_token *new)
 {
 	t_token	*tmp;
 
 	if (!lst || !new)
-		return ;	
+		return ;
 	if (!*lst)
 	{
 		*lst = new;
-		return;
+		return ;
 	}
 	tmp = *lst;
 	while (tmp->next)

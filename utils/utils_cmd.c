@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 08:41:23 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 11:42:56 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:25:59 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	**cpy_tab_str(char **tab, int size)
 {
 	int		i;
 	char	**cpy_tab;
-	
+
 	i = 0;
 	cpy_tab = malloc(sizeof(char *) * (size + 2));
 	if (tab)
@@ -30,7 +30,7 @@ static char	**cpy_tab_str(char **tab, int size)
 	return (cpy_tab);
 }
 
-t_cmd *new_cmd(void)
+t_cmd	*new_cmd(void)
 {
 	t_cmd	*cmd;
 
@@ -95,11 +95,11 @@ void	add_cmd(t_cmd **lst, t_cmd *new)
 	t_cmd	*tmp;
 
 	if (!lst || !new)
-		return ;	
+		return ;
 	if (!*lst)
 	{
 		*lst = new;
-		return;
+		return ;
 	}
 	tmp = *lst;
 	while (tmp->next)

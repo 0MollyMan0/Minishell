@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 11:49:59 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 09:25:03 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:24:53 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_strndup(const char *s, int start, int end)
 
 int	ft_isspace(const char c)
 {
-	if ( c == ' ' || (c > 10 && c < 14))
+	if (c == ' ' || (c > 10 && c < 14))
 		return (1);
 	else
 		return (0);
