@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 14:26:38 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/22 09:25:34 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	print_tokens(t_token *tokens)
 {
+	if (tokens)
+		printf("\n| ---- TOKENIZE ---- |\n");
 	while (tokens)
 	{
 		printf("TOKEN ");
@@ -36,15 +38,15 @@ void	print_tokens(t_token *tokens)
 
 void	print_redir(t_redir *redir)
 {
-	printf("|	redir\n");
+	printf("	redir:");
 	if (redir->type == TOKEN_REDIR_IN)
-		printf("		type = REDIR_IN\n");
+		printf("  type = REDIR_IN\n");
 	else if (redir->type == TOKEN_REDIR_OUT)
-		printf("		type = REDIR_OUT\n");
+		printf("  type = REDIR_OUT\n");
 	else if (redir->type == TOKEN_APPEND)
-		printf("		type = APPEND\n");
+		printf("  type = APPEND\n");
 	else if (redir->type == TOKEN_HEREDOC)
-		printf("		type = HEREDOC\n");
+		printf("  type = HEREDOC\n");
 	printf("		filename = [%s]\n", redir->filename);
 }
 
@@ -53,13 +55,15 @@ void	print_cmds(t_cmd *cmds)
 	t_cmd	*cmds_tmp;
 	t_redir	*redir_tmp;
 
+	if (cmds)
+		printf("\n| ---- PARSING ---- |\n");
 	cmds_tmp = cmds;
 	while (cmds_tmp)
 	{
 		int i = 0;
 
 		printf("command:\n");
-		printf("	argv : [");
+		printf("	argv :  [");
 		while (cmds_tmp->argv[i])
 		{
 			printf("%s, ", cmds_tmp->argv[i]);
