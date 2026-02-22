@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 11:49:59 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 14:24:53 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/22 12:29:08 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,20 @@ int	ft_isspace(const char c)
 		return (1);
 	else
 		return (0);
+}
+
+char *ft_realoc(char *str, size_t len)
+{
+	char	*new_str;
+	int		i;
+
+	new_str = malloc(sizeof(char) * (ft_strlen(str) + len + 1));
+	i = 0;
+	while (str[i])
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
 }
