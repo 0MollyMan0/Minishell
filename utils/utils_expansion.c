@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 09:39:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 10:38:28 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/24 10:43:04 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,9 @@ char	*get_var(char *str, int *i)
 	var_name[0] = '\0';
 	while (is_char_var(str[*i]))
 	{
-		var_name = ft_realloc(var_name, 1);
+		var_name = add_char(var_name, str[*i]);
 		if (!var_name)
 			return (NULL);
-		var_name[i_name] = str[*i];
 		*i += 1;
 		i_name++;
 	}

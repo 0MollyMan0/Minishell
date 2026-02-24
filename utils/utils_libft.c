@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 11:49:59 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 10:39:08 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/24 10:40:56 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ int	ft_isspace(const char c)
 		return (0);
 }
 
-char	*ft_realloc(char *str, size_t len)
+char	*add_char(char *str, char c)
 {
 	char	*new_str;
 	int		i;
 
-	new_str = malloc(sizeof(char) * (ft_strlen(str) + len + 1));
+	new_str = malloc(sizeof(char) * (ft_strlen(str) + c + 1));
 	if (!new_str)
 		return (NULL);
 	i = 0;
@@ -83,6 +83,7 @@ char	*ft_realloc(char *str, size_t len)
 		new_str[i] = str[i];
 		i++;
 	}
+	new_str[i] = c;
 	new_str[i + 1] = '\0';
 	return (new_str);
 }

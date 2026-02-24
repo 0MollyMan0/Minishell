@@ -6,13 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 09:41:16 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 10:30:12 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/24 10:42:39 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	var_case(char *str, char **new_str, int	*i, int	*i_new)
+void	var_case(char *str, char **new_str, int	*i)
 {
 	char	*var;
 	int		i_var;
@@ -23,11 +23,9 @@ void	var_case(char *str, char **new_str, int	*i, int	*i_new)
 		*new_str = NULL;
 	while (var && var[i_var])
 	{
-		*new_str = ft_realloc(*new_str, 1);
+		*new_str = add_char(*new_str, var[i_var]);
 		if (!*new_str)
 			return ;
-		*new_str[*i_new] = var[i_var];
-		*i_new += 1;
 		i_var++;
 	}
 }
