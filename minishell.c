@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/22 09:25:34 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/24 07:53:23 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,10 @@ int	main(void)
 		tokens = tokenize(input);
 		print_tokens(tokens);
 		cmds = parser(tokens);
+		printf("\nBefore Expansion\n");
+		print_cmds(cmds);
+		cmds = expansion(cmds);
+		printf("\nAfter Expansion\n");
 		print_cmds(cmds);
 		free_all(input, tokens, cmds);
 	}

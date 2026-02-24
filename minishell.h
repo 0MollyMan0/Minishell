@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/22 12:29:21 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/24 07:52:15 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_strndup(const char *s, int start, int end);
 int		ft_isspace(const char c);
-char	*ft_realoc(char *str, size_t len);
+char	*ft_realloc(char *str, size_t len);
 
 // --- Utils Token --- //
 void	add_token(t_token **lst, t_token *new);
@@ -78,8 +78,11 @@ void	setup_signals(void);
 // --- Prepare Input --- //
 char	*read_input(void);
 t_token	*tokenize(const char *input);
-void	free_all(char *input, t_token *tokens, t_cmd *cmds);
 t_cmd	*parser(t_token *tokens);
+t_cmd	*expansion(t_cmd *cmds);
+
+// --- Free --- //
+void	free_all(char *input, t_token *tokens, t_cmd *cmds);
 void	free_cmds(t_cmd *cmds);
 
 void	exit_minish(void);
