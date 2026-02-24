@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 11:49:59 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 10:40:56 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:07:18 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ char	*add_char(char *str, char c)
 	}
 	new_str[i] = c;
 	new_str[i + 1] = '\0';
+	free(str);
 	return (new_str);
 }
