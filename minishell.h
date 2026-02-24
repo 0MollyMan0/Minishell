@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 07:52:15 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/24 10:39:48 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ void	add_cmd(t_cmd **lst, t_cmd *new);
 void	add_arg(t_cmd *cmd, char *value);
 void	add_redir(t_cmd *cmd, t_token_type type, char *filename);
 
+// --- Utils Expansion --- //
+int		is_expandable(char c);
+int		is_char_var(char c);
+char	*get_var(char *str, int *i);
+
 // --- Signals --- //
 void	handle_sigint(int sig);
 void	setup_signals(void);
@@ -80,6 +85,7 @@ char	*read_input(void);
 t_token	*tokenize(const char *input);
 t_cmd	*parser(t_token *tokens);
 t_cmd	*expansion(t_cmd *cmds);
+void	var_case(char *str, char **new_str, int	*i, int	*i_new);
 
 // --- Free --- //
 void	free_all(char *input, t_token *tokens, t_cmd *cmds);

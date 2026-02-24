@@ -39,9 +39,11 @@ SRCS    = minishell.c \
 		$(PARS_DIR)/free.c \
 		$(PARS_DIR)/parser.c \
 		$(PARS_DIR)/expansion.c \
+		$(PARS_DIR)/expansion_case.c \
 		$(UTILS_DIR)/utils_libft.c \
 		$(UTILS_DIR)/utils_token.c \
 		$(UTILS_DIR)/utils_cmd.c \
+		$(UTILS_DIR)/utils_expansion.c \
 
 
 OBJS    = $(SRCS:.c=.o)

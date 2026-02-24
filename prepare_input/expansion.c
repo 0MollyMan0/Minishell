@@ -6,20 +6,26 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 08:06:59 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/24 10:38:14 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	is_expandable(char c)
+static void	do_expansion(char **str, char **new_str, int *i, int *i_new)
 {
-	if (c == '_'
-		|| c == '?'
-		|| (c >= 'A' && c <= 'Z')
-		|| (c >= 'a' && c <= 'z'))
-		return (1);
-	return (0);
+	*i += 1;
+	// if (*str[*i] == '?')
+	// {
+		
+	// }
+	// else
+		var_case(*str, *(&new_str), *(&i) , *(&i_new));
+	if (!*str || !*new_str)
+	{
+		*new_str = NULL;
+		*str = NULL;
+	}
 }
 
 static char *create_new_arg(char *str)
@@ -31,19 +37,20 @@ static char *create_new_arg(char *str)
 	i = 0;
 	i_new = 0;
 	new_str = malloc(sizeof(char) * 1);
+	if (!new_str)
+		return (NULL);
 	new_str[0] = '\0';
 	while (str[i])
 	{
-		if (str[i] == '$' && is_expandable(str[i]))
-		{
-			do_expansion();
-		}
+		if (str[i] == '$' && is_expandable(str[i + 1]))
+			do_expansion(&str, &new_str, &i, &i_new);
 		else
 		{
 			new_str = ft_realloc(new_str, 1);
-			new_str[i_new] = str[i];
+			if (!new_str)
+				return (NULL);
+			new_str[i_new] = str[i++];
 			i_new++;
-			i++;
 		}
 	}
 	free(str);
