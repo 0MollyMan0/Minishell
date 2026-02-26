@@ -51,8 +51,11 @@ typedef struct s_cmd
 	char			**argv;
 	t_redir			*redirs;
 	int				has_pipe;
+	int				type;
 	struct s_cmd	*next;
 }	t_cmd;
+
+
 
 // --- Utils Libft --- //
 size_t	ft_strlen(const char *s);
