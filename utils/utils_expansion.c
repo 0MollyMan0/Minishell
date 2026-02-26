@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 09:39:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 10:43:04 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/26 08:43:33 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_expandable(char c)
 
 int	is_char_var(char c)
 {
-	if (c == '_' 
+	if (c == '_'
 		|| (c >= '0' && c <= '9')
 		|| (c >= 'A' && c <= 'Z')
 		|| (c >= 'a' && c <= 'z'))
@@ -36,7 +36,7 @@ char	*get_var(char *str, int *i)
 	char	*var_name;
 	char	*var;
 	int		i_name;
-	
+
 	i_name = 0;
 	var_name = malloc(sizeof(char) * 1);
 	if (!var_name)

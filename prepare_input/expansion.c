@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 11:02:56 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/26 08:43:13 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	do_expansion(char **str, char **new_str, int *i)
 	*i += 1;
 	// if (*str[*i] == '?')
 	// {
-		
+	// 
 	// }
 	// else
-		var_case(*str, *(&new_str), *(&i));
+	var_case(*str, *(&new_str), *(&i));
 	if (!*str || !*new_str)
 	{
 		*new_str = NULL;
@@ -30,9 +30,9 @@ static void	do_expansion(char **str, char **new_str, int *i)
 
 static char *create_new_arg(char *str)
 {
-	int	i;
-	char *new_str;
-	
+	int		i;
+	char	*new_str;
+
 	i = 0;
 	new_str = malloc(sizeof(char) * 1);
 	if (!new_str)
