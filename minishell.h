@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 10:04:27 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 10:10:30 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,10 @@ void	add_redir(t_cmd *cmd, t_token_type type, char *filename);
 int		is_expandable(char c);
 int		is_char_var(char c);
 char	*get_var(char *str, int *i);
+
+// --- Utils Exec --- //
+int		is_slash_in(char *str);
+char	*get_path(char **envp);
 
 // --- Signals --- //
 void	handle_sigint(int sig);
