@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 10:10:30 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 10:36:00 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	*add_char(char *str, char c);
 int		ft_isspace(const char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(char const *s, char c);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 // --- Utils Token --- //
 void	add_token(t_token **lst, t_token *new);
@@ -91,6 +92,7 @@ char	*get_var(char *str, int *i);
 // --- Utils Exec --- //
 int		is_slash_in(char *str);
 char	*get_path(char **envp);
+char	*find_path(char *cmd, char **envp);
 
 // --- Signals --- //
 void	handle_sigint(int sig);

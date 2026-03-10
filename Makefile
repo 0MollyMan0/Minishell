@@ -45,9 +45,11 @@ SRCS    = minishell.c \
 		$(UTILS_DIR)/utils_libft1.c \
 		$(UTILS_DIR)/utils_libft2.c \
 		$(UTILS_DIR)/ft_split.c \
+		$(UTILS_DIR)/ft_strjoin.c \
 		$(UTILS_DIR)/utils_token.c \
 		$(UTILS_DIR)/utils_cmd.c \
 		$(UTILS_DIR)/utils_expansion.c \
+		$(UTILS_DIR)/utils_exec.c \
 
 
 OBJS    = $(SRCS:.c=.o)
