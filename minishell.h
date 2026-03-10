@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 10:43:35 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 09:15:06 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+#include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <signal.h>
@@ -55,7 +56,13 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-
+typedef struct s_minish
+{
+	int		g_exit_status;
+	char	*input;
+	t_token	*tokens;
+	t_cmd	*cmds;
+}	t_minish;
 
 // --- Utils Libft --- //
 size_t	ft_strlen(const char *s);
@@ -90,8 +97,11 @@ t_cmd	*parser(t_token *tokens);
 t_cmd	*expansion(t_cmd *cmds);
 void	var_case(char *str, char **new_str, int	*i);
 
+// --- Exec --- //
+void	exec(t_minish *minish, char **envp);
+
 // --- Free --- //
-void	free_all(char *input, t_token *tokens, t_cmd *cmds);
+void	free_all(t_minish *minish);
 void	free_cmds(t_cmd *cmds);
 
 void	exit_minish(void);

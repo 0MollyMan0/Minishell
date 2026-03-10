@@ -1,0 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/10 08:20:49 by anfouger          #+#    #+#             */
+/*   Updated: 2026/03/10 09:53:20 by anfouger         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <minishell.h>
+
+void	exec(t_minish *minish, char **envp)
+{
+	pid_t pid;
+    int status;
+
+    if (!minish->cmds || !minish->cmds->argv || !minish->cmds->argv[0])
+        return;
+    pid = fork();
+    if (pid == 0)
+    {
+        execve(minish->cmds->argv[0], minish->cmds->argv, envp);
+        perror("execve");
+        exit(127);
+    }
+    else
+	{
+        waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+    		minish->g_exit_status = WEXITSTATUS(status);
+	}
+}
