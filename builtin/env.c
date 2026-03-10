@@ -6,10 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 14:22:34 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:32:31 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-
+int	builtin_env(char **argv)
+{
+	
+}
