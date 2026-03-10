@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 09:15:06 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 10:04:27 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ typedef struct s_minish
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_strndup(const char *s, int start, int end);
-int		ft_isspace(const char c);
 char	*add_char(char *str, char c);
+int		ft_isspace(const char c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	**ft_split(char const *s, char c);
 
 // --- Utils Token --- //
 void	add_token(t_token **lst, t_token *new);
