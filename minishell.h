@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 14:13:02 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:27:08 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <signal.h>

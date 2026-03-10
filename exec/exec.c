@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 08:20:49 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 14:18:58 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:29:37 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	exec_path(t_minish *minish, char **envp)
 	else
 	{
 		execve(path, minish->cmds->argv, envp);
-		perror("execve");	
+		perror("execve");
 	}
 	exit(127);
 }

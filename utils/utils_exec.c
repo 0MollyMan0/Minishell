@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:07:26 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 14:12:25 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:29:17 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*find_path(char *cmd, char **envp)
 {
-	char **paths;
-	char *full_path;
-	char *tmp;
-	int i;
+	char	**paths;
+	char	*full_path;
+	char	*tmp;
+	int		i;
 
 	paths = ft_split(get_path(envp), ':');
 	i = 0;
@@ -29,7 +29,7 @@ char	*find_path(char *cmd, char **envp)
 		if (access(full_path, X_OK) == 0)
 		{
 			free_tab(paths);
-			return (full_path);	
+			return (full_path);
 		}
 		free(full_path);
 		i++;
@@ -54,8 +54,9 @@ int	is_slash_in(char *str)
 
 char	*get_path(char **envp)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
@@ -88,7 +89,7 @@ int	is_builtin(char *cmd)
 
 int	exec_builtin(t_minish *minish)
 {
-	char **argv;
+	char	**argv;
 
 	argv = minish->cmds->argv;
 	if (!ft_strcmp(argv[0], "echo"))

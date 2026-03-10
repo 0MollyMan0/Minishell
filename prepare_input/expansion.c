@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 12:05:43 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:27:32 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	do_expansion(char **str, char **new_str, int *i, t_minish minish)
 {
 	char	*value;
 	char	*tmp;
-	
+
 	*i += 1;
 	if ((*str)[*i] == '?')
 	{
@@ -54,7 +54,7 @@ static void	do_expansion(char **str, char **new_str, int *i, t_minish minish)
 	}
 }
 
-static char *create_new_arg(char *str, t_minish minish)
+static char	*create_new_arg(char *str, t_minish minish)
 {
 	int		i;
 	char	*new_str;

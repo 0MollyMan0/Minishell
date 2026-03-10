@@ -14,6 +14,7 @@ CCFLAGS= -Wall -Wextra -Werror -g -I ./
 PARS_DIR	= prepare_input
 UTILS_DIR	= utils
 EXEC_DIR	= exec
+BUILTIN_DIR	= builtin
 OBJ_DIR    = obj
 
 # ----------------------------------
@@ -41,6 +42,13 @@ SRCS    = minishell.c \
 		$(PARS_DIR)/parser.c \
 		$(PARS_DIR)/expansion.c \
 		$(EXEC_DIR)/exec.c \
+		$(BUILTIN_DIR)/cd.c \
+		$(BUILTIN_DIR)/echo.c \
+		$(BUILTIN_DIR)/env.c \
+		$(BUILTIN_DIR)/exit.c \
+		$(BUILTIN_DIR)/export.c \
+		$(BUILTIN_DIR)/pwd.c \
+		$(BUILTIN_DIR)/unset.c \
 		$(UTILS_DIR)/utils_libft1.c \
 		$(UTILS_DIR)/utils_libft2.c \
 		$(UTILS_DIR)/ft_split.c \
@@ -79,7 +87,7 @@ clean:
 		if [ -f $$file ]; then \
 			echo "  $(YELLOW)→ removing$(RESET) $$file"; \
 			rm -f $$file; \
-			sleep 0.05; \
+			sleep 0.02; \
 		fi \
 	done
 
@@ -87,7 +95,7 @@ clean:
 fclean: clean
 	@echo "$(RED)[FCLEAN]$(RESET) Removing executable..."
 	@echo "  $(YELLOW)→ removing$(RESET) $(NAME)";
-	@sleep 0.08
+	@sleep 0.03
 	@rm -f $(NAME)
 
 # Rebuild

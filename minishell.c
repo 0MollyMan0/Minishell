@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 11:02:30 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:26:55 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@
 // 	}
 // }
 
-static	t_minish init_minish(int ac, char **av)
+static t_minish	init_minish(int ac, char **av)
 {
 	t_minish	minish;
 
