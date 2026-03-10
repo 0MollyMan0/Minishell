@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 09:15:14 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 11:02:30 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static	t_minish init_minish(int ac, char **av)
 	(void)ac;
 	(void)av;
 	minish.g_exit_status = 0;
+	minish.input = NULL;
 	minish.tokens = NULL;
 	minish.cmds = NULL;
 	return (minish);
@@ -107,7 +108,7 @@ int	main(int ac, char **av, char **envp)
 			break ;
 		add_history(minish.input);
 		minish.tokens = tokenize(minish.input);
-		minish.cmds = expansion(parser(minish.tokens));
+		minish.cmds = expansion(minish, parser(minish.tokens));
 		exec(&minish, envp);
 		free_all(&minish);
 	}

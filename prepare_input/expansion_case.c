@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 09:41:16 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 11:11:38 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 11:06:12 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ void	var_case(char *str, char **new_str, int	*i)
 		i_var++;
 	}
 }
+
+// void	exit_status_case(t_minish minish)
+// {
+// 	char	*value;
+
+// 	value = ft_itoa(minish.g_exit_status);
+// }
 
 // void	var_inter(char *str, char **new_str, int	*i)
 // {

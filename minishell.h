@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 10:36:00 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 11:03:15 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int		ft_isspace(const char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_itoa(int n);
 
 // --- Utils Token --- //
 void	add_token(t_token **lst, t_token *new);
@@ -102,8 +103,9 @@ void	setup_signals(void);
 char	*read_input(void);
 t_token	*tokenize(const char *input);
 t_cmd	*parser(t_token *tokens);
-t_cmd	*expansion(t_cmd *cmds);
+t_cmd	*expansion(t_minish minish, t_cmd *cmds);
 void	var_case(char *str, char **new_str, int	*i);
+void	exit_status_case(t_minish minish);
 
 // --- Exec --- //
 void	exec(t_minish *minish, char **envp);
