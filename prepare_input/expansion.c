@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 11:11:59 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:05:43 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ t_cmd	*expansion(t_minish minish, t_cmd *cmds)
 		{
 			if (p_cmds->argv[i][0] != '\'')
 				p_cmds->argv[i] = create_new_arg(p_cmds->argv[i], minish);
+			if (p_cmds->argv[i][0] == '\'' || p_cmds->argv[i][0] == '\"')
+				p_cmds->argv[i] = remove_quotes(p_cmds->argv[i]);
 			i++;
 		}
 		p_cmds = p_cmds->next;
