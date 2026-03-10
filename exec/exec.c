@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 08:20:49 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 13:31:37 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:18:58 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ static void	exec_direct(t_minish *minish, char **envp)
 	exit(127);
 }
 
-void	exec(t_minish *minish, char **envp)
+static void	exec_out(t_minish *minish, char **envp)
 {
 	pid_t	pid;
 	int		status;
-	
-	if (!minish->cmds || !minish->cmds->argv || !minish->cmds->argv[0])
-		return ;
+
 	pid = fork();
 	if (pid == 0)
 	{
@@ -55,4 +53,16 @@ void	exec(t_minish *minish, char **envp)
 		if (WIFEXITED(status))
 			minish->g_exit_status = WEXITSTATUS(status);
 	}
+}
+
+void	exec(t_minish *minish, char **envp)
+{
+	if (!minish->cmds || !minish->cmds->argv || !minish->cmds->argv[0])
+		return ;
+	if (is_builtin(minish->cmds->argv[0]))
+	{
+		minish->g_exit_status = exec_builtin(minish);
+		return ;
+	}
+	exec_out(minish, envp);
 }

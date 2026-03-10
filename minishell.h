@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 13:35:04 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:13:02 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	*ft_strndup(const char *s, int start, int end);
 char	*add_char(char *str, char c);
 int		ft_isspace(const char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
@@ -96,6 +97,8 @@ char	*remove_quotes(char *str);
 int		is_slash_in(char *str);
 char	*get_path(char **envp);
 char	*find_path(char *cmd, char **envp);
+int		is_builtin(char *cmd);
+int		exec_builtin(t_minish *minish);
 
 // --- Signals --- //
 void	handle_sigint(int sig);

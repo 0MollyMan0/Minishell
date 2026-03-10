@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:07:26 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 13:35:33 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:12:25 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,47 @@ char	*get_path(char **envp)
 		i++;
 	}
 	return (NULL);
+}
+
+int	is_builtin(char *cmd)
+{
+	if (!cmd)
+		return (0);
+	if (!ft_strcmp(cmd, "echo"))
+		return (1);
+	if (!ft_strcmp(cmd, "cd"))
+		return (1);
+	if (!ft_strcmp(cmd, "pwd"))
+		return (1);
+	if (!ft_strcmp(cmd, "export"))
+		return (1);
+	if (!ft_strcmp(cmd, "unset"))
+		return (1);
+	if (!ft_strcmp(cmd, "env"))
+		return (1);
+	if (!ft_strcmp(cmd, "exit"))
+		return (1);
+	return (0);
+}
+
+int	exec_builtin(t_minish *minish)
+{
+	char **argv;
+
+	argv = minish->cmds->argv;
+	if (!ft_strcmp(argv[0], "echo"))
+		return (builtin_echo(argv));
+	if (!ft_strcmp(argv[0], "pwd"))
+		return (builtin_pwd());
+	if (!ft_strcmp(argv[0], "env"))
+		return (builtin_env());
+	if (!ft_strcmp(argv[0], "cd"))
+		return (builtin_cd(argv));
+	if (!ft_strcmp(argv[0], "export"))
+		return (builtin_export(argv));
+	if (!ft_strcmp(argv[0], "unset"))
+		return (builtin_unset(argv));
+	if (!ft_strcmp(argv[0], "exit"))
+		return (builtin_exit(minish, argv));
+	return (1);
 }
