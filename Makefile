@@ -40,7 +40,6 @@ SRCS    = minishell.c \
 		$(PARS_DIR)/free.c \
 		$(PARS_DIR)/parser.c \
 		$(PARS_DIR)/expansion.c \
-		$(PARS_DIR)/expansion_case.c \
 		$(EXEC_DIR)/exec.c \
 		$(UTILS_DIR)/utils_libft1.c \
 		$(UTILS_DIR)/utils_libft2.c \

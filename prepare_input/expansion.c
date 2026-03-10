@@ -6,11 +6,29 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 11:07:48 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 11:11:59 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static void	var_case(char *str, char **new_str, int	*i)
+{
+	char	*var;
+	int		i_var;
+
+	i_var = 0;
+	var = get_var(str, *(&i));
+	if (!var)
+		*new_str = NULL;
+	while (var && var[i_var])
+	{
+		*new_str = add_char(*new_str, var[i_var]);
+		if (!*new_str)
+			return ;
+		i_var++;
+	}
+}
 
 static void	do_expansion(char **str, char **new_str, int *i, t_minish minish)
 {

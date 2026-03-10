@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 11:03:15 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/10 11:12:12 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ char	*read_input(void);
 t_token	*tokenize(const char *input);
 t_cmd	*parser(t_token *tokens);
 t_cmd	*expansion(t_minish minish, t_cmd *cmds);
-void	var_case(char *str, char **new_str, int	*i);
-void	exit_status_case(t_minish minish);
 
 // --- Exec --- //
 void	exec(t_minish *minish, char **envp);
