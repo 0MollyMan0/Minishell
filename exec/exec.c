@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 08:20:49 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 14:29:37 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 08:36:34 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	exec_out(t_minish *minish, char **envp)
 	}
 }
 
-void	exec(t_minish *minish, char **envp)
+void	exec(t_minish *minish)
 {
 	if (!minish->cmds || !minish->cmds->argv || !minish->cmds->argv[0])
 		return ;
@@ -64,5 +64,5 @@ void	exec(t_minish *minish, char **envp)
 		minish->g_exit_status = exec_builtin(minish);
 		return ;
 	}
-	exec_out(minish, envp);
+	exec_out(minish, minish->envp);
 }

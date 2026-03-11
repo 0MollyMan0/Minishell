@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:07:26 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 14:29:17 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 08:37:36 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	exec_builtin(t_minish *minish)
 	if (!ft_strcmp(argv[0], "pwd"))
 		return (builtin_pwd());
 	if (!ft_strcmp(argv[0], "env"))
-		return (builtin_env());
+		return (builtin_env(minish));
 	if (!ft_strcmp(argv[0], "cd"))
 		return (builtin_cd(argv));
 	if (!ft_strcmp(argv[0], "export"))

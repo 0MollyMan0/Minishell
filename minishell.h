@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 14:27:08 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 08:35:39 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_minish
 {
 	int		g_exit_status;
 	char	*input;
+	char	**envp;
 	t_token	*tokens;
 	t_cmd	*cmds;
 }	t_minish;
@@ -111,7 +112,7 @@ t_cmd	*parser(t_token *tokens);
 t_cmd	*expansion(t_minish minish, t_cmd *cmds);
 
 // --- Exec --- //
-void	exec(t_minish *minish, char **envp);
+void	exec(t_minish *minish);
 
 // --- Free --- //
 void	free_all(t_minish *minish);

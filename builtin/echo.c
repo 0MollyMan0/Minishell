@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:21:31 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 14:39:09 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 08:50:27 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,15 @@
 int	builtin_echo(char **argv)
 {
 	int	i;
+	int	flag;
 
 	i = 1;
+	flag = 0;
+	if (argv[i] && ft_strcmp(argv[i], "-n"))
+	{
+		flag = 1;
+		i++;
+	}
 	while (argv[i])
 	{
 		printf("%s", argv[i]);
@@ -24,6 +31,7 @@ int	builtin_echo(char **argv)
 			printf(" ");
 		i++;
 	}
-	printf("\n");
+	if (!flag)
+		printf("\n");
 	return (0);
 }
