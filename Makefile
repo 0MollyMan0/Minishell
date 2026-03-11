@@ -58,6 +58,7 @@ SRCS    = minishell.c \
 		$(UTILS_DIR)/utils_cmd.c \
 		$(UTILS_DIR)/utils_expansion.c \
 		$(UTILS_DIR)/utils_exec.c \
+		$(UTILS_DIR)/utils_builtin.c \
 
 
 OBJS    = $(SRCS:.c=.o)

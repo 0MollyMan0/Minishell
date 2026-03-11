@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   utils_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 14:21:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 09:53:07 by anfouger         ###   ########.fr       */
+/*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
+/*   Updated: 2026/03/11 09:50:49 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	builtin_cd(char **argv, char **envp)
+char	*get_env_value(char **envp, char *str)
 {
-	char *path;
+	int	i;
 
-	if (!argv[1])
-		path = get_env_value(envp, "HOME");
-	else
-		path = argv[1];
-	if (!path)
-		return (1);
-	if (chdir(path) == -1)
+	i = 0;
+	while (envp[i])
 	{
-		perror("cd");
-		return (1);
+		if (ft_strncmp(envp[i], str, ft_strlen(str) + 1) == 0)
+			return (envp[i] + ft_strlen(str) + 1);
+		i++;
 	}
-	return (0);
+	return (NULL);
 }

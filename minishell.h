@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 09:10:37 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 09:41:04 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ char	*find_path(char *cmd, char **envp);
 int		is_builtin(char *cmd);
 int		exec_builtin(t_minish *minish);
 
+// --- Utils Builtin --- //
+char	*get_env_value(char **envp, char *str);
+
 // --- Signals --- //
 void	handle_sigint(int sig);
 void	setup_signals(void);
@@ -115,10 +118,10 @@ t_cmd	*expansion(t_minish minish, t_cmd *cmds);
 void	exec(t_minish *minish);
 
 // --- Buitin --- //
-int	builtin_cd(char **argv);
-int	builtin_echo(char **argv);
-int	builtin_env(char **envp);
-int	builtin_pwd(void);
+int		builtin_cd(char **argv, char **envp);
+int		builtin_echo(char **argv);
+int		builtin_env(char **envp);
+int		builtin_pwd(void);
 
 // --- Free --- //
 void	free_all(t_minish *minish);
