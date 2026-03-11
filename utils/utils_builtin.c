@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 12:24:20 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 15:13:29 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,22 @@ char	**add_var(char **tab, char *str)
 	new_tab[i + 1] = NULL;
 	free_tab(tab);
 	return (new_tab);
+}
+
+int	change_value(char **envp, char *key, char *str)
+{
+	int		i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], key, ft_strlen(key)) == 0)
+		{
+			free(envp[i]);
+			envp[i] = ft_strdup(str);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }

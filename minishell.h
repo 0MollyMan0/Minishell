@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 12:02:16 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 15:04:20 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int		exec_builtin(t_minish *minish);
 // --- Utils Builtin --- //
 char	*get_env_value(char **envp, char *str);
 char	**add_var(char **tab, char *str);
+int		change_value(char **envp, char *key, char *str);
 
 // --- Signals --- //
 void	handle_sigint(int sig);
@@ -126,6 +127,7 @@ int		builtin_cd(char **argv, char **envp);
 int		builtin_echo(char **argv);
 int		builtin_env(char **envp);
 int		builtin_pwd(void);
+int		builtin_export(t_minish *minish, char **argv);
 
 // --- Free --- //
 void	free_all(t_minish *minish);
