@@ -77,7 +77,7 @@ $(NAME): $(OBJS)
 # Compilation of .c in .o
 %.o: %.c
 	@echo "$(CYAN)[COMPILING]$(RESET) $<"
-	@sleep 0.1
+	@sleep 0.03
 	@$(CC) $(CCFLAGS) -c $< -o $@
 
 # Clean

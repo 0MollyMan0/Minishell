@@ -6,13 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:21 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 14:32:52 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 09:12:12 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	builtin_unset(char **argv)
-{
+// int	builtin_unset(char **argv)
+// {
 	
-}
+// }
