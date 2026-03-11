@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 09:50:49 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 10:18:35 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,4 @@ char	*get_env_value(char **envp, char *str)
 	}
 	return (NULL);
 }
+

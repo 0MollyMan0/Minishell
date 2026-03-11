@@ -6,13 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 10:33:07 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 14:21:22 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 10:32:08 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	exit_minish(void)
+void	exit_minish()
 {
 	printf("exit\n");
 }
