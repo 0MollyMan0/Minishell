@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 10:32:14 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 12:02:16 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
 void	free_tab(char **s);
-char	**copy_tab(char **tab);
+char	**dup_tab(char **tab);
+void	clean_tab(char **tab, int i);
+int		tab_len(char **tab);
 
 // --- Utils Token --- //
 void	add_token(t_token **lst, t_token *new);
@@ -104,6 +106,7 @@ int		exec_builtin(t_minish *minish);
 
 // --- Utils Builtin --- //
 char	*get_env_value(char **envp, char *str);
+char	**add_var(char **tab, char *str);
 
 // --- Signals --- //
 void	handle_sigint(int sig);

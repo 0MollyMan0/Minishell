@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:02:02 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 11:33:01 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 12:01:59 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (1);
 }
 
-static int	tab_len(char **tab)
+int	tab_len(char **tab)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ static int	tab_len(char **tab)
 	return (i);
 }
 
-char	**copy_tab(char **tab)
+char	**dup_tab(char **tab)
 {
 	char	**new_tab;
 	int		i;
@@ -66,13 +66,18 @@ char	**copy_tab(char **tab)
 		new_tab[i] = ft_strdup(tab[i]);
 		if (!new_tab[i])
 		{
-			while (i > 0)
-				free(new_tab[--i]);
-			free(new_tab);
+			clean_tab(tab, i);
 			return (NULL);
 		}
 		i++;	
 	}
 	new_tab[i] = NULL;
 	return (new_tab);
+}
+
+void	clean_tab(char **tab, int i)
+{
+	while (i > 0)
+		free(tab[--i]);
+	free(tab);
 }

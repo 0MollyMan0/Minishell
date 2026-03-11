@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 10:18:35 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 12:24:20 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,42 @@ char	*get_env_value(char **envp, char *str)
 	return (NULL);
 }
 
+static int	copy_tab(char **tab, char **new_tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i])
+	{
+		new_tab[i] = ft_strdup(tab[i]);
+		if (!new_tab[i])
+		{
+			clean_tab(new_tab, i);
+			return (-1);
+		}
+		i++;	
+	}
+	return (i);
+}
+
+char	**add_var(char **tab, char *str)
+{
+	char	**new_tab;
+	int		i;
+
+	new_tab = malloc(sizeof(char *) * (tab_len(tab) + 2));
+	if (!new_tab)
+		return (NULL);
+	i = copy_tab(tab, new_tab);
+	if (i == -1)
+		return (NULL);
+	new_tab[i] = ft_strdup(str);
+	if (!new_tab[i])
+	{
+		clean_tab(new_tab, i);
+		return (NULL);
+	}
+	new_tab[i + 1] = NULL;
+	free_tab(tab);
+	return (new_tab);
+}
