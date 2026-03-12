@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:14 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 15:14:16 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/12 09:46:39 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,6 @@ static char	*get_key(char *str)
 	key = ft_strndup(str, 0, len);
 	return (key);
 }
-
-// static char	*get_value(char *str)
-// {
-// 	char	*value;
-// 	int		i;
-
-// 	i = 0;
-// 	while (str[i] != '=')
-// 		i++;
-// 	value = ft_strndup(str, i, ft_strlen(str));
-// 	return (value);
-// }
 
 static int	verif_export(char *str)
 {
