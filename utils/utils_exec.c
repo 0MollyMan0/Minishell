@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:07:26 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/14 12:46:03 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:49:51 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*find_path(char *cmd, char **envp)
 	char	*tmp;
 	int		i;
 
+	if (!get_path(envp))
+		return (NULL);
 	paths = ft_split(get_path(envp), ':');
 	i = 0;
 	while (paths[i])

@@ -6,16 +6,16 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:43 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/14 12:45:03 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/14 13:09:48 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	exit_to_many_arg(void)
+static int	exit_to_many_arg(char *str)
 {
 	printf("exit: too many arguments\n");
-	return (2);
+	return (ft_atol(str));
 }
 
 static int	exit_no_arg(t_minish *minish)
@@ -61,16 +61,21 @@ static int	is_code_exit(char *str)
 
 int	builtin_exit(t_minish *minish, char **argv)
 {
+	long	arg;
+
+	if (!is_code_exit(argv[1]) || !verif_max_long(argv[1]))
+		return (exit_wrong_arg(minish, argv[1]));
 	if (!argv[1])
 		return (exit_no_arg(minish));
 	if (argv[2])
-		return (exit_to_many_arg());
-	if (!is_code_exit(argv[1]) || !verif_max_long(argv[1]))
-		return (exit_wrong_arg(minish, argv[1]));
+		return (exit_to_many_arg(argv[1]));
 	if (is_code_exit(argv[1]) && verif_max_long(argv[1]))
 	{
 		printf("exit\n");
-		exit(ft_atol(argv[1]) % 256);
+		arg = ft_atol(argv[1]);
+		free_all(minish);
+		free_tab(minish->envp);
+		exit((unsigned char)arg);
 	}
 	return (0);
 }
