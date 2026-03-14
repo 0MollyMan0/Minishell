@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_libft.c                                      :+:      :+:    :+:   */
+/*   utils_libft1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 11:49:59 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 11:07:18 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/12 11:46:48 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*ft_strdup(const char *s)
 	int		i;
 	char	*res;
 
+	if (!s)
+		return (NULL);
 	i = ft_strlen(s);
 	res = malloc((i + 1) * sizeof(char));
 	if (!res)

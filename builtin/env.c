@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/20 10:33:07 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 10:32:08 by anfouger         ###   ########.fr       */
+/*   Created: 2026/03/10 14:22:32 by anfouger          #+#    #+#             */
+/*   Updated: 2026/03/11 09:13:22 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	exit_minish()
+int	builtin_env(char **envp)
 {
-	printf("exit\n");
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		printf("%s\n", envp[i]);
+		i++;
+	}
+	return (0);
 }

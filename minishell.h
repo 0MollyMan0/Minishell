@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/24 10:43:35 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/12 11:04:04 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <signal.h>
@@ -55,14 +56,30 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-
+typedef struct s_minish
+{
+	int		g_exit_status;
+	char	*input;
+	char	**envp;
+	t_token	*tokens;
+	t_cmd	*cmds;
+}	t_minish;
 
 // --- Utils Libft --- //
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_strndup(const char *s, int start, int end);
-int		ft_isspace(const char c);
 char	*add_char(char *str, char c);
+int		ft_isspace(const char c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
+char	**ft_split(char const *s, char c);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_itoa(int n);
+void	free_tab(char **s);
+char	**dup_tab(char **tab);
+void	clean_tab(char **tab, int i);
+int		tab_len(char **tab);
 
 // --- Utils Token --- //
 void	add_token(t_token **lst, t_token *new);
@@ -78,6 +95,20 @@ void	add_redir(t_cmd *cmd, t_token_type type, char *filename);
 int		is_expandable(char c);
 int		is_char_var(char c);
 char	*get_var(char *str, int *i);
+char	*remove_quotes(char *str);
+
+// --- Utils Exec --- //
+int		is_slash_in(char *str);
+char	*get_path(char **envp);
+char	*find_path(char *cmd, char **envp);
+int		is_builtin(char *cmd);
+int		exec_builtin(t_minish *minish);
+
+// --- Utils Builtin --- //
+char	*get_env_value(char **envp, char *str);
+char	**add_var(char **tab, char *str);
+int		change_value(char **envp, char *key, char *str);
+char	*get_key(char *str);
 
 // --- Signals --- //
 void	handle_sigint(int sig);
@@ -87,13 +118,23 @@ void	setup_signals(void);
 char	*read_input(void);
 t_token	*tokenize(const char *input);
 t_cmd	*parser(t_token *tokens);
-t_cmd	*expansion(t_cmd *cmds);
-void	var_case(char *str, char **new_str, int	*i);
+t_cmd	*expansion(t_minish minish, t_cmd *cmds);
+
+// --- Exec --- //
+void	exec(t_minish *minish);
+
+// --- Buitin --- //
+int		builtin_cd(char **argv, char **envp);
+int		builtin_echo(char **argv);
+int		builtin_env(char **envp);
+int		builtin_pwd(void);
+int		builtin_export(t_minish *minish, char **argv);
+int		builtin_unset(t_minish *minish, char **argv);
 
 // --- Free --- //
-void	free_all(char *input, t_token *tokens, t_cmd *cmds);
+void	free_all(t_minish *minish);
 void	free_cmds(t_cmd *cmds);
 
-void	exit_minish(void);
+void	exit_minish();
 
 #endif

@@ -13,6 +13,8 @@ CCFLAGS= -Wall -Wextra -Werror -g -I ./
 # ----------------------------------
 PARS_DIR	= prepare_input
 UTILS_DIR	= utils
+EXEC_DIR	= exec
+BUILTIN_DIR	= builtin
 OBJ_DIR    = obj
 
 # ----------------------------------
@@ -39,11 +41,24 @@ SRCS    = minishell.c \
 		$(PARS_DIR)/free.c \
 		$(PARS_DIR)/parser.c \
 		$(PARS_DIR)/expansion.c \
-		$(PARS_DIR)/expansion_case.c \
-		$(UTILS_DIR)/utils_libft.c \
+		$(EXEC_DIR)/exec.c \
+		$(BUILTIN_DIR)/cd.c \
+		$(BUILTIN_DIR)/echo.c \
+		$(BUILTIN_DIR)/env.c \
+		$(BUILTIN_DIR)/exit.c \
+		$(BUILTIN_DIR)/export.c \
+		$(BUILTIN_DIR)/pwd.c \
+		$(BUILTIN_DIR)/unset.c \
+		$(UTILS_DIR)/utils_libft1.c \
+		$(UTILS_DIR)/utils_libft2.c \
+		$(UTILS_DIR)/ft_split.c \
+		$(UTILS_DIR)/ft_strjoin.c \
+		$(UTILS_DIR)/ft_itoa.c \
 		$(UTILS_DIR)/utils_token.c \
 		$(UTILS_DIR)/utils_cmd.c \
 		$(UTILS_DIR)/utils_expansion.c \
+		$(UTILS_DIR)/utils_exec.c \
+		$(UTILS_DIR)/utils_builtin.c \
 
 
 OBJS    = $(SRCS:.c=.o)
@@ -63,7 +78,7 @@ $(NAME): $(OBJS)
 # Compilation of .c in .o
 %.o: %.c
 	@echo "$(CYAN)[COMPILING]$(RESET) $<"
-	@sleep 0.1
+	@sleep 0.03
 	@$(CC) $(CCFLAGS) -c $< -o $@
 
 # Clean
@@ -73,7 +88,7 @@ clean:
 		if [ -f $$file ]; then \
 			echo "  $(YELLOW)→ removing$(RESET) $$file"; \
 			rm -f $$file; \
-			sleep 0.05; \
+			sleep 0.02; \
 		fi \
 	done
 
@@ -81,7 +96,7 @@ clean:
 fclean: clean
 	@echo "$(RED)[FCLEAN]$(RESET) Removing executable..."
 	@echo "  $(YELLOW)→ removing$(RESET) $(NAME)";
-	@sleep 0.08
+	@sleep 0.03
 	@rm -f $(NAME)
 
 # Rebuild

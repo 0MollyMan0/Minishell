@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:11:42 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 14:35:21 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/11 10:30:50 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_tokens(t_token *tokens)
 	}
 }
 
-static void	free_tab(char **tab)
+void	free_tab(char **tab)
 {
 	int	i;
 
@@ -64,12 +64,12 @@ void	free_cmds(t_cmd *cmds)
 	}
 }
 
-void	free_all(char *input, t_token *tokens, t_cmd *cmds)
+void	free_all(t_minish *minish)
 {
-	if (input)
-		free(input);
-	if (tokens)
-		free_tokens(tokens);
-	if (cmds)
-		free_cmds(cmds);
+	if (minish->input)
+		free(minish->input);
+	if (minish->tokens)
+		free_tokens(minish->tokens);
+	if (minish->cmds)
+		free_cmds(minish->cmds);
 }

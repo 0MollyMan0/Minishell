@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/20 10:33:07 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 10:32:08 by anfouger         ###   ########.fr       */
+/*   Created: 2026/03/10 14:22:43 by anfouger          #+#    #+#             */
+/*   Updated: 2026/03/11 09:11:59 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	exit_minish()
-{
-	printf("exit\n");
-}
+// int	builtin_exit(char **argv)
+// {
+	
+// }

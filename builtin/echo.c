@@ -1,18 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/20 10:33:07 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 10:32:08 by anfouger         ###   ########.fr       */
+/*   Created: 2026/03/10 14:21:31 by anfouger          #+#    #+#             */
+/*   Updated: 2026/03/11 08:50:27 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	exit_minish()
+int	builtin_echo(char **argv)
 {
-	printf("exit\n");
+	int	i;
+	int	flag;
+
+	i = 1;
+	flag = 0;
+	if (argv[i] && ft_strcmp(argv[i], "-n"))
+	{
+		flag = 1;
+		i++;
+	}
+	while (argv[i])
+	{
+		printf("%s", argv[i]);
+		if (argv[i + 1])
+			printf(" ");
+		i++;
+	}
+	if (!flag)
+		printf("\n");
+	return (0);
 }
