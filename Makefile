@@ -34,7 +34,7 @@ WHITE       = \033[0;37m
 # SOURCES
 # ----------------------------------
 SRCS    = minishell.c \
-		exit.c \
+		exit_def.c \
 		$(PARS_DIR)/read_input.c \
 		$(PARS_DIR)/signals.c \
 		$(PARS_DIR)/tokenize.c \
@@ -54,6 +54,7 @@ SRCS    = minishell.c \
 		$(UTILS_DIR)/ft_split.c \
 		$(UTILS_DIR)/ft_strjoin.c \
 		$(UTILS_DIR)/ft_itoa.c \
+		$(UTILS_DIR)/ft_atoi.c \
 		$(UTILS_DIR)/utils_token.c \
 		$(UTILS_DIR)/utils_cmd.c \
 		$(UTILS_DIR)/utils_expansion.c \

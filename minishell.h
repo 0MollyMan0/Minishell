@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/12 11:04:04 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:45:46 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/ioctl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <limits.h>
 
 typedef enum e_token_type
 {
@@ -80,6 +81,8 @@ void	free_tab(char **s);
 char	**dup_tab(char **tab);
 void	clean_tab(char **tab, int i);
 int		tab_len(char **tab);
+long	ft_atol(char *str);
+long	verif_max_long(char *s);
 
 // --- Utils Token --- //
 void	add_token(t_token **lst, t_token *new);
@@ -130,6 +133,7 @@ int		builtin_env(char **envp);
 int		builtin_pwd(void);
 int		builtin_export(t_minish *minish, char **argv);
 int		builtin_unset(t_minish *minish, char **argv);
+int		builtin_exit(t_minish *minish, char **argv);
 
 // --- Free --- //
 void	free_all(t_minish *minish);

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:02:02 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 12:01:59 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:39:00 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,25 @@ void	clean_tab(char **tab, int i)
 	while (i > 0)
 		free(tab[--i]);
 	free(tab);
+}
+
+long	verif_max_long(char *s)
+{
+	long	result;
+	int		i;
+
+	result = 0;
+	i = 0;
+	while (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13))
+		i++;
+	while (s[i] >= '0' && s[i] <= '9')
+	{
+		if (result > (LONG_MAX - (s[i] - '0')) / 10)
+			return (0);
+		result = result * 10 + (s[i] - '0');
+		i++;
+	}
+	if (s[i] != '\0')
+		return (0);
+	return (result);
 }
