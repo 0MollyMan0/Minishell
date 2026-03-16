@@ -63,7 +63,7 @@ SRCS    = minishell.c \
 		$(UTILS_DIR)/utils_tab.c \
 
 
-OBJS    = $(SRCS:.c=.o)
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 # ----------------------------------
 # RULES
@@ -78,15 +78,23 @@ $(NAME): $(OBJS)
 	@echo "\033[1;32m[OK] -> $(NAME) ready!\033[0m"
 
 # Compilation of .c in .o
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@echo "$(CYAN)[COMPILING]$(RESET) $<"
 	@sleep 0.03
 	@$(CC) $(CCFLAGS) -c $< -o $@
 
+# Create obj dir and all needed subdirs
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR) \
+		$(OBJ_DIR)/$(PARS_DIR) \
+		$(OBJ_DIR)/$(UTILS_DIR) \
+		$(OBJ_DIR)/$(EXEC_DIR) \
+		$(OBJ_DIR)/$(BUILTIN_DIR)
+
 # Clean
 clean:
 	@echo "$(RED)[CLEAN]$(RESET) Removing object files..."
-	@for file in $(OBJS); do \
+	@for file in $(OBJ_DIR)/$(OBJS); do \
 		if [ -f $$file ]; then \
 			echo "  $(YELLOW)→ removing$(RESET) $$file"; \
 			rm -f $$file; \
