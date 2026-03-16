@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:14 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/12 10:41:46 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/16 09:33:58 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static int	verif_export(char *str)
 		|| (str[i] >= 'a' && str[i] <= 'z'))
 	{
 		while (str[i] == '_'
-		|| (str[i] >= 'A' && str[i] <= 'Z')
-		|| (str[i] >= 'a' && str[i] <= 'z')
-		|| (str[i] >= '0' && str[i] <= '9'))
+			|| (str[i] >= 'A' && str[i] <= 'Z')
+			|| (str[i] >= 'a' && str[i] <= 'z')
+			|| (str[i] >= '0' && str[i] <= '9'))
 			i++;
 		if (str[i] != '=')
 			return (0);

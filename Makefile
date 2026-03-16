@@ -60,6 +60,7 @@ SRCS    = minishell.c \
 		$(UTILS_DIR)/utils_expansion.c \
 		$(UTILS_DIR)/utils_exec.c \
 		$(UTILS_DIR)/utils_builtin.c \
+		$(UTILS_DIR)/utils_tab.c \
 
 
 OBJS    = $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/14 12:45:46 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/16 09:33:47 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,6 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
-void	free_tab(char **s);
-char	**dup_tab(char **tab);
-void	clean_tab(char **tab, int i);
-int		tab_len(char **tab);
 long	ft_atol(char *str);
 long	verif_max_long(char *s);
 
@@ -113,6 +109,12 @@ char	**add_var(char **tab, char *str);
 int		change_value(char **envp, char *key, char *str);
 char	*get_key(char *str);
 
+// --- Utils Tab --- //
+void	free_tab(char **s);
+char	**dup_tab(char **tab);
+void	clean_tab(char **tab, int i);
+int		tab_len(char **tab);
+
 // --- Signals --- //
 void	handle_sigint(int sig);
 void	setup_signals(void);
@@ -139,6 +141,6 @@ int		builtin_exit(t_minish *minish, char **argv);
 void	free_all(t_minish *minish);
 void	free_cmds(t_cmd *cmds);
 
-void	exit_minish();
+void	exit_minish(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:02:02 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/14 12:39:00 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/16 09:32:36 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,46 +40,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 			return (0);
 	}
 	return (1);
-}
-
-int	tab_len(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
-char	**dup_tab(char **tab)
-{
-	char	**new_tab;
-	int		i;
-
-	new_tab = malloc(sizeof(char *) * (tab_len(tab) + 1));
-	if (!new_tab)
-		return (NULL);
-	i = 0;
-	while (tab[i])
-	{
-		new_tab[i] = ft_strdup(tab[i]);
-		if (!new_tab[i])
-		{
-			clean_tab(tab, i);
-			return (NULL);
-		}
-		i++;	
-	}
-	new_tab[i] = NULL;
-	return (new_tab);
-}
-
-void	clean_tab(char **tab, int i)
-{
-	while (i > 0)
-		free(tab[--i]);
-	free(tab);
 }
 
 long	verif_max_long(char *s)
