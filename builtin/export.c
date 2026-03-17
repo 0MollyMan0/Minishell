@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:14 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/17 09:40:58 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/17 13:31:31 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,25 @@ static int	verif_export(char *str)
 	return (0);
 }
 
+static int export_no_args(t_minish *minish)
+{
+	int	i;
+
+	i = 0;
+	while (minish->envp[i])
+	{
+		printf("declare -x %s\n", minish->envp[i]);
+		i++;
+	}
+	return (0);
+}
+
 int	builtin_export(t_minish *minish, char **argv)
 {
 	char	*key;
 
+	if (!argv[1])
+		return(export_no_args(minish));
 	if (!verif_export(argv[1]))
 		return (1);
 	key = get_key(argv[1]);
