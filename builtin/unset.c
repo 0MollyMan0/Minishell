@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:21 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/17 09:41:44 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/17 14:35:11 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	builtin_unset(t_minish *minish, char **argv)
 {
 	int		i;
 
+	if (!argv[1])
+		return (0);
 	i = get_index(minish->envp, argv[1]);
 	if (i == -1)
 		return (0);
