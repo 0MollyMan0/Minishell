@@ -40,7 +40,7 @@ int	exec_builtin(t_cmd *cmd, t_minish *minish)
 	if (ft_strncmp(cmd->argv[0], "unset", 6) == 0)
 		return (builtin_unset(minish, cmd->argv));
 	if (ft_strncmp(cmd->argv[0], "env", 4) == 0)
-		return (builtin_env(minish->envp));
+		return (builtin_env(minish->envp, cmd->argv));
 	if (ft_strncmp(cmd->argv[0], "exit", 5) == 0)
 		return (builtin_exit(minish, cmd->argv));
 	return (0);

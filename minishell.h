@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/17 09:40:18 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/17 13:24:11 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,13 +130,13 @@ t_token	*tokenize(const char *input);
 t_cmd	*parser(t_token *tokens);
 t_cmd	*expansion(t_minish minish, t_cmd *cmds);
 
-// --- Exec --- //
-void	exec(t_minish *minish);
+// // --- Exec --- //
+// void	exec(t_minish *minish);
 
 // --- Buitin --- //
 int		builtin_cd(char **argv, char **envp);
 int		builtin_echo(char **argv);
-int		builtin_env(char **envp);
+int		builtin_env(char **envp, char **argv);
 int		builtin_pwd(void);
 int		builtin_export(t_minish *minish, char **argv);
 int		builtin_unset(t_minish *minish, char **argv);
