@@ -16,6 +16,7 @@ UTILS_DIR	= utils
 EXEC_DIR	= exec
 BUILTIN_DIR	= builtin
 OBJ_DIR    = obj
+EXEC_DIR = pipe_and_exec
 
 # ----------------------------------
 # COLORS
@@ -41,7 +42,6 @@ SRCS    = minishell.c \
 		$(PARS_DIR)/free.c \
 		$(PARS_DIR)/parser.c \
 		$(PARS_DIR)/expansion.c \
-		$(EXEC_DIR)/exec.c \
 		$(BUILTIN_DIR)/cd.c \
 		$(BUILTIN_DIR)/echo.c \
 		$(BUILTIN_DIR)/env.c \
@@ -60,10 +60,15 @@ SRCS    = minishell.c \
 		$(UTILS_DIR)/utils_expansion.c \
 		$(UTILS_DIR)/utils_exec.c \
 		$(UTILS_DIR)/utils_builtin.c \
-		$(UTILS_DIR)/utils_tab.c \
+		$(EXEC_DIR)/check_builtins.c \
+		$(EXEC_DIR)/execution.c \
+		$(EXEC_DIR)/execution_utils.c \
+		$(EXEC_DIR)/count_cmds_and_pipes.c \
+		$(EXEC_DIR)/access_and_path.c \
+		$(EXEC_DIR)/dup_and_redir.c \
+		$(EXEC_DIR)/child_process.c 
 
-
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+OBJS    = $(SRCS:.c=.o)
 
 # ----------------------------------
 # RULES
@@ -78,23 +83,15 @@ $(NAME): $(OBJS)
 	@echo "\033[1;32m[OK] -> $(NAME) ready!\033[0m"
 
 # Compilation of .c in .o
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+%.o: %.c
 	@echo "$(CYAN)[COMPILING]$(RESET) $<"
 	@sleep 0.03
 	@$(CC) $(CCFLAGS) -c $< -o $@
 
-# Create obj dir and all needed subdirs
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR) \
-		$(OBJ_DIR)/$(PARS_DIR) \
-		$(OBJ_DIR)/$(UTILS_DIR) \
-		$(OBJ_DIR)/$(EXEC_DIR) \
-		$(OBJ_DIR)/$(BUILTIN_DIR)
-
 # Clean
 clean:
 	@echo "$(RED)[CLEAN]$(RESET) Removing object files..."
-	@for file in $(OBJ_DIR)/$(OBJS); do \
+	@for file in $(OBJS); do \
 		if [ -f $$file ]; then \
 			echo "  $(YELLOW)→ removing$(RESET) $$file"; \
 			rm -f $$file; \

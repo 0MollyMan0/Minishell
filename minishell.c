@@ -110,7 +110,7 @@ int	main(int ac, char **av, char **envp)
 		add_history(minish.input);
 		minish.tokens = tokenize(minish.input);
 		minish.cmds = expansion(minish, parser(minish.tokens));
-		exec(&minish);
+		execute(&minish);
 		free_all(&minish);
 	}
 	free_tab(minish.envp);

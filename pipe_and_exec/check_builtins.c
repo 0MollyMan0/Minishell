@@ -1,0 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_builtins.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jemonthi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/09 13:53:18 by jemonthi          #+#    #+#             */
+/*   Updated: 2026/03/14 17:32:06 by jemonthi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+// Return 1 if it's a builtin //
+int	is_builtin(char *cmd)
+{
+	if (!cmd)
+		return (0);
+	return (ft_strncmp(cmd, "echo", 5) == 0
+		|| ft_strncmp(cmd, "cd", 3) == 0
+		|| ft_strncmp(cmd, "pwd", 4) == 0
+		|| ft_strncmp(cmd, "export", 7) == 0
+		|| ft_strncmp(cmd, "unset", 6) == 0
+		|| ft_strncmp(cmd, "env", 4) == 0
+		|| ft_strncmp(cmd, "exit", 5) == 0);
+}
+
+// We look for the right function to call //
+int	exec_builtin(t_cmd *cmd, t_minish *minish)
+{
+	if (ft_strncmp(cmd->argv[0], "cd", 3) == 0)
+		return (builtin_cd(cmd->argv, minish->envp));
+	if (ft_strncmp(cmd->argv[0], "echo", 5) == 0)
+		return (builtin_echo(cmd->argv));
+	if (ft_strncmp(cmd->argv[0], "export", 7) == 0)
+		return (builtin_export(minish, cmd->argv));
+	if (ft_strncmp(cmd->argv[0], "pwd", 4) == 0)
+		return (builtin_pwd());
+	if (ft_strncmp(cmd->argv[0], "unset", 6) == 0)
+		return (builtin_unset(minish, cmd->argv));
+	if (ft_strncmp(cmd->argv[0], "env", 4) == 0)
+		return (builtin_env(minish->envp));
+	if (ft_strncmp(cmd->argv[0], "exit", 5) == 0)
+		return (builtin_exit(minish, cmd->argv));
+	return (0);
+}

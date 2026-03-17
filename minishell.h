@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/16 09:33:47 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:45:46 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
+# include <fcntl.h>
+# include <sys/wait.h>
 
 typedef enum e_token_type
 {
@@ -66,6 +68,12 @@ typedef struct s_minish
 	t_cmd	*cmds;
 }	t_minish;
 
+typedef struct s_exec
+{
+    int     nb_cmds;
+    int     **pipes;
+}   t_exec;
+
 // --- Utils Libft --- //
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
@@ -77,6 +85,10 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
+void	free_tab(char **s);
+char	**dup_tab(char **tab);
+void	clean_tab(char **tab, int i);
+int		tab_len(char **tab);
 long	ft_atol(char *str);
 long	verif_max_long(char *s);
 
@@ -98,22 +110,13 @@ char	*remove_quotes(char *str);
 
 // --- Utils Exec --- //
 int		is_slash_in(char *str);
-char	*get_path(char **envp);
-char	*find_path(char *cmd, char **envp);
 int		is_builtin(char *cmd);
-int		exec_builtin(t_minish *minish);
 
 // --- Utils Builtin --- //
 char	*get_env_value(char **envp, char *str);
 char	**add_var(char **tab, char *str);
 int		change_value(char **envp, char *key, char *str);
 char	*get_key(char *str);
-
-// --- Utils Tab --- //
-void	free_tab(char **s);
-char	**dup_tab(char **tab);
-void	clean_tab(char **tab, int i);
-int		tab_len(char **tab);
 
 // --- Signals --- //
 void	handle_sigint(int sig);
@@ -137,10 +140,40 @@ int		builtin_export(t_minish *minish, char **argv);
 int		builtin_unset(t_minish *minish, char **argv);
 int		builtin_exit(t_minish *minish, char **argv);
 
+/* pipes and execve and check builtin functions */
+void	execute(t_minish *minish);
+int		is_builtin(char *cmd);
+int		exec_builtin(t_cmd *cmd, t_minish *minish);
+void	ft_putstr_fd(char *s, int fd);
+char	*ft_strjoin_three(char *s1, char *s2, char *s3);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
+/* count_cmds_and_pipes functions */
+int		count_cmds(t_cmd *cmds);
+int		**create_pipes(int nb_pipes);
+void	close_all_pipes(int **pipes, int nb_pipes);
+void	free_pipes(int **pipes, int nb_pipes);
+
+/* access_and_path functions */
+char	*resolve_cmd(char *cmd, char **envp);
+int		access_path(char *cmd);
+char	*find_path(char **envp);
+
+/* dup_and_redir functions */
+void	apply_redirs(t_redir *redirs);
+void	apply_redir_out(t_redir *redir);
+void	apply_redir_in(t_redir *redir);
+
+/* child process functions */
+void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec);
+void	exec_external(t_cmd *cmd, char **envp);
+void	setup_pipes_child(int i, int nb_cmds, int **pipes);
+
 // --- Free --- //
 void	free_all(t_minish *minish);
 void	free_cmds(t_cmd *cmds);
+void	ft_free_split(char **split);
 
-void	exit_minish(void);
+void	exit_minish();
 
 #endif
