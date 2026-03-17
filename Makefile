@@ -51,6 +51,7 @@ SRCS    = minishell.c \
 		$(BUILTIN_DIR)/unset.c \
 		$(UTILS_DIR)/utils_libft1.c \
 		$(UTILS_DIR)/utils_libft2.c \
+		$(UTILS_DIR)/utils_tab.c \
 		$(UTILS_DIR)/ft_split.c \
 		$(UTILS_DIR)/ft_strjoin.c \
 		$(UTILS_DIR)/ft_itoa.c \

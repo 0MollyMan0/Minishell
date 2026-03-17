@@ -1,42 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_exec.c                                       :+:      :+:    :+:   */
+/*   utils_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 10:07:26 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/17 09:39:07 by anfouger         ###   ########.fr       */
+/*   Created: 2026/03/17 09:39:32 by anfouger          #+#    #+#             */
+/*   Updated: 2026/03/17 09:39:56 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	is_slash_in(char *str)
+int	tab_len(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '/')
-			return (1);
+	while (tab[i])
 		i++;
-	}
-	return (0);
+	return (i);
 }
 
-void	ft_free_split(char **split)
+char	**dup_tab(char **tab)
 {
-	int	i;
+	char	**new_tab;
+	int		i;
 
-	if (!split)
-		return ;
+	new_tab = malloc(sizeof(char *) * (tab_len(tab) + 1));
+	if (!new_tab)
+		return (NULL);
 	i = 0;
-	while (split[i])
+	while (tab[i])
 	{
-		free(split[i]);
+		new_tab[i] = ft_strdup(tab[i]);
+		if (!new_tab[i])
+		{
+			clean_tab(tab, i);
+			return (NULL);
+		}
 		i++;
 	}
-	free(split);
+	new_tab[i] = NULL;
+	return (new_tab);
+}
+
+void	clean_tab(char **tab, int i)
+{
+	while (i > 0)
+		free(tab[--i]);
+	free(tab);
 }

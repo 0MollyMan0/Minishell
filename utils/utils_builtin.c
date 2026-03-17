@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 15:13:29 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/17 09:38:40 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	copy_tab(char **tab, char **new_tab)
 			clean_tab(new_tab, i);
 			return (-1);
 		}
-		i++;	
+		i++;
 	}
 	return (i);
 }

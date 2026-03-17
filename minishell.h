@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/14 12:45:46 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/17 09:40:18 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ typedef struct s_minish
 
 typedef struct s_exec
 {
-    int     nb_cmds;
-    int     **pipes;
-}   t_exec;
+	int		nb_cmds;
+	int		**pipes;
+}	t_exec;
 
 // --- Utils Libft --- //
 size_t	ft_strlen(const char *s);
@@ -85,12 +85,14 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
-void	free_tab(char **s);
-char	**dup_tab(char **tab);
-void	clean_tab(char **tab, int i);
 int		tab_len(char **tab);
 long	ft_atol(char *str);
 long	verif_max_long(char *s);
+
+// --- Utils Tab --- //
+void	free_tab(char **s);
+char	**dup_tab(char **tab);
+void	clean_tab(char **tab, int i);
 
 // --- Utils Token --- //
 void	add_token(t_token **lst, t_token *new);
@@ -174,6 +176,6 @@ void	free_all(t_minish *minish);
 void	free_cmds(t_cmd *cmds);
 void	ft_free_split(char **split);
 
-void	exit_minish();
+void	exit_minish(void);
 
 #endif
