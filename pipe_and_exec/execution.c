@@ -23,7 +23,7 @@ static void	exec_single(t_minish *minish)
 		return ;
 	if (is_builtin(minish->cmds->argv[0]))
 	{
-		exec_builtin(minish->cmds, minish);
+		exec_single_builtin(minish);
 		return ;
 	}
 	pid = fork();

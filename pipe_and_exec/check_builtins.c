@@ -26,6 +26,25 @@ int	is_builtin(char *cmd)
 		|| ft_strncmp(cmd, "exit", 5) == 0);
 }
 
+/* save last stdin/stdout with dup then call exec 
+	(usefull for appended ( > or >> or < character)) */
+
+void	exec_single_builtin(t_minish *minish)
+{
+	int	saved_stdout;
+	int	saved_stdin;
+
+	saved_stdout = dup(STDOUT_FILENO);
+	saved_stdin = dup(STDIN_FILENO);
+	if (minish->cmds->redirs)
+		apply_redirs(minish->cmds->redirs);
+	exec_builtin(minish->cmds, minish);
+	dup2(saved_stdout, STDOUT_FILENO);
+	dup2(saved_stdin, STDIN_FILENO);
+	close(saved_stdout);
+	close(saved_stdin);
+}
+
 // We look for the right function to call //
 int	exec_builtin(t_cmd *cmd, t_minish *minish)
 {

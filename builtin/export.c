@@ -47,7 +47,7 @@ static int	verif_export(char *str)
 	return (0);
 }
 
-static int export_no_args(t_minish *minish)
+static int	export_no_args(t_minish *minish)
 {
 	int	i;
 
@@ -65,7 +65,7 @@ int	builtin_export(t_minish *minish, char **argv)
 	char	*key;
 
 	if (!argv[1])
-		return(export_no_args(minish));
+		return (export_no_args(minish));
 	if (!verif_export(argv[1]))
 		return (1);
 	key = get_key(argv[1]);

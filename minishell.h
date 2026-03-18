@@ -142,13 +142,18 @@ int		builtin_export(t_minish *minish, char **argv);
 int		builtin_unset(t_minish *minish, char **argv);
 int		builtin_exit(t_minish *minish, char **argv);
 
-/* pipes and execve and check builtin functions */
+/* execve function */
 void	execute(t_minish *minish);
-int		is_builtin(char *cmd);
-int		exec_builtin(t_cmd *cmd, t_minish *minish);
+
+/* execution utils */
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strjoin_three(char *s1, char *s2, char *s3);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
+/* check builtins */
+void	exec_single_builtin(t_minish *minish);
+int		exec_builtin(t_cmd *cmd, t_minish *minish);
+int		is_builtin(char *cmd);
 
 /* count_cmds_and_pipes functions */
 int		count_cmds(t_cmd *cmds);
