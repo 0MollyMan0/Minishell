@@ -19,7 +19,8 @@ char	*get_env_value(char **envp, char *str)
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_strncmp(envp[i], str, ft_strlen(str) + 1) == 0)
+		if (ft_strncmp(envp[i], str, ft_strlen(str)) == 0
+			&& envp[i][ft_strlen(str)] == '=')
 			return (envp[i] + ft_strlen(str) + 1);
 		i++;
 	}

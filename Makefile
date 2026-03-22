@@ -67,7 +67,8 @@ SRCS    = minishell.c \
 		$(EXEC_DIR)/count_cmds_and_pipes.c \
 		$(EXEC_DIR)/access_and_path.c \
 		$(EXEC_DIR)/dup_and_redir.c \
-		$(EXEC_DIR)/child_process.c 
+		$(EXEC_DIR)/child_process.c \
+		$(EXEC_DIR)/heredoc.c 
 
 OBJS    = $(SRCS:.c=.o)
 

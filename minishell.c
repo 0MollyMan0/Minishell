@@ -105,6 +105,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		minish.input = read_input();
+		minish.g_exit_status = g_exit_status;
 		if (!minish.input)
 			break ;
 		add_history(minish.input);

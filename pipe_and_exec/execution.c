@@ -34,11 +34,16 @@ static void	exec_single(t_minish *minish)
 		exec_external(minish->cmds, minish->envp);
 	}
 	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+	{
+		minish->g_exit_status = WEXITSTATUS(status);
+		g_exit_status = minish->g_exit_status;
+	}
 }
 
 /* ---- Wait all pids with waitpid---- */
 
-static void	waitpid_all(int nb_cmds, pid_t *pids)
+static void	waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
 {
 	int	i;
 	int	status;
@@ -47,6 +52,11 @@ static void	waitpid_all(int nb_cmds, pid_t *pids)
 	while (i < nb_cmds)
 	{
 		waitpid(pids[i], &status, 0);
+		if (WIFEXITED(status))
+		{
+			minish->g_exit_status = WEXITSTATUS(status);
+			g_exit_status = minish->g_exit_status;
+		}
 		i++;
 	}
 }
@@ -91,7 +101,7 @@ static void	exec_multi(t_minish *minish, t_exec *exec)
 		return ;
 	}
 	close_all_pipes(exec->pipes, exec->nb_cmds - 1);
-	waitpid_all(exec->nb_cmds, pids);
+	waitpid_all(minish, exec->nb_cmds, pids);
 	free_pipes(exec->pipes, exec->nb_cmds - 1);
 	free(pids);
 }
@@ -102,6 +112,7 @@ void	execute(t_minish *minish)
 {
 	t_exec	exec;
 
+	prepare_heredocs(minish->cmds);
 	exec.nb_cmds = count_cmds(minish->cmds);
 	if (exec.nb_cmds == 1)
 	{

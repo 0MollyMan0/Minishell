@@ -181,6 +181,12 @@ void	free_all(t_minish *minish);
 void	free_cmds(t_cmd *cmds);
 void	ft_free_split(char **split);
 
+// --- Heredoc --- //
+void	prepare_heredocs(t_cmd *cmds);
+
 void	exit_minish(void);
+
+/* global variable for SIGNAL */
+extern int	g_exit_status;
 
 #endif
