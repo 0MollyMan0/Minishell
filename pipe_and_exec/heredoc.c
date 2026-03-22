@@ -38,6 +38,7 @@ static void	handle_heredoc(t_redir *redir)
 	if (fd < 0)
 	{
 		perror("heredoc");
+		g_exit_status = 1;
 		return ;
 	}
 	write_heredoc(fd, redir->filename);
