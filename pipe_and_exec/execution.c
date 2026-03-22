@@ -112,7 +112,7 @@ void	execute(t_minish *minish)
 {
 	t_exec	exec;
 
-	prepare_heredocs(minish->cmds);
+	prepare_heredoc(minish->cmds);
 	exec.nb_cmds = count_cmds(minish->cmds);
 	if (exec.nb_cmds == 1)
 	{

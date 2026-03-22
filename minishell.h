@@ -182,7 +182,7 @@ void	free_cmds(t_cmd *cmds);
 void	ft_free_split(char **split);
 
 // --- Heredoc --- //
-void	prepare_heredocs(t_cmd *cmds);
+void	prepare_heredoc(t_cmd *cmds);
 
 void	exit_minish(void);
 

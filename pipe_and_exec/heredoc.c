@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+static int	strcmp_heredoc(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (1);
+		i++;
+	}
+	return (s1[i] - s2[i]);
+}
+
 static void	write_heredoc(int fd, char *delimiter)
 {
 	char	*line;
@@ -19,7 +33,7 @@ static void	write_heredoc(int fd, char *delimiter)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, delimiter) == 1)
+		if (!line || strcmp_heredoc(line, delimiter) == 0)
 		{
 			free(line);
 			break ;
@@ -47,7 +61,7 @@ static void	handle_heredoc(t_redir *redir)
 	redir->filename = ft_strdup("/tmp/minishell_heredoc");
 }
 
-void	prepare_heredocs(t_cmd *cmds)
+void	prepare_heredoc(t_cmd *cmds)
 {
 	t_cmd	*cur;
 	t_redir	*redir;
