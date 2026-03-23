@@ -38,7 +38,7 @@ void	exec_single_builtin(t_minish *minish)
 	saved_stdin = dup(STDIN_FILENO);
 	if (minish->cmds->redirs)
 		apply_redirs(minish->cmds->redirs);
-	exec_builtin(minish->cmds, minish);
+	minish->g_exit_status = exec_builtin(minish->cmds, minish);
 	dup2(saved_stdout, STDOUT_FILENO);
 	dup2(saved_stdin, STDIN_FILENO);
 	close(saved_stdout);

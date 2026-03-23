@@ -6,16 +6,16 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:43 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/23 14:26:40 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/23 14:48:18 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	exit_too_many_arg(t_minish *minish)
+static int	exit_too_many_arg(void)
 {
 	write(2, "exit: too many arguments\n", 25);
-	minish->g_exit_status = 2;
+	return (2);
 }
 
 // static int	exit_no_arg(t_minish *minish)
@@ -74,10 +74,7 @@ int	builtin_exit(t_minish *minish, char **argv)
 	if (!is_code_exit(argv[1]) || !verif_max_long(argv[1]))
 		exit_numeric_error(minish, argv[1]);
 	if (argv[2])
-	{
-		exit_too_many_arg(minish);
-		return (1);
-	}
+		return (exit_too_many_arg());
 	arg = ft_atol(argv[1]);
 	free_all(minish);
 	free_tab(minish->envp);
