@@ -6,37 +6,38 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:43 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/23 13:56:33 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/23 14:26:40 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	exit_to_many_arg(char *str)
+static void	exit_too_many_arg(t_minish *minish)
 {
-	printf("exit: too many arguments\n");
-	return (ft_atol(str));
+	write(2, "exit: too many arguments\n", 25);
+	minish->g_exit_status = 2;
 }
 
-static int	exit_no_arg(t_minish *minish)
-{
-	int	exit_code;
+// static int	exit_no_arg(t_minish *minish)
+// {
+// 	int	exit_code;
 
-	exit_code = minish->g_exit_status;
-	printf("exit\n");
-	free_all(minish);
-	free_tab(minish->envp);
-	exit(exit_code);
-	return (0);
-}
+// 	exit_code = minish->g_exit_status;
+// 	printf("exit\n");
+// 	free_all(minish);
+// 	free_tab(minish->envp);
+// 	exit(exit_code);
+// 	return (0);
+// }
 
-static int	exit_wrong_arg(t_minish *minish, char *arg)
+static int	exit_numeric_error(t_minish *minish, char *arg)
 {
-	printf("exit: %s: numeric argument required\n", arg);
+	write(2, "exit: ", 6);
+	write(2, arg, ft_strlen(arg));
+	write(2, ": numeric argument required\n", 28);
 	free_all(minish);
 	free_tab(minish->envp);
 	exit(2);
-	return (0);
 }
 
 static int	is_code_exit(char *str)
@@ -61,21 +62,24 @@ static int	is_code_exit(char *str)
 
 int	builtin_exit(t_minish *minish, char **argv)
 {
-	long	arg;
+	long arg;
 
+	write(1, "exit\n", 5);
 	if (!argv[1])
-		return (exit_no_arg(minish));
-	if (!is_code_exit(argv[1]) || !verif_max_long(argv[1]))
-		return (exit_wrong_arg(minish, argv[1]));
-	if (argv[2])
-		return (exit_to_many_arg(argv[1]));
-	if (is_code_exit(argv[1]) && verif_max_long(argv[1]))
 	{
-		printf("exit\n");
-		arg = ft_atol(argv[1]);
 		free_all(minish);
 		free_tab(minish->envp);
-		exit((unsigned char)arg);
+		exit(minish->g_exit_status);
 	}
-	return (0);
+	if (!is_code_exit(argv[1]) || !verif_max_long(argv[1]))
+		exit_numeric_error(minish, argv[1]);
+	if (argv[2])
+	{
+		exit_too_many_arg(minish);
+		return (1);
+	}
+	arg = ft_atol(argv[1]);
+	free_all(minish);
+	free_tab(minish->envp);
+	exit((unsigned char)arg);
 }
