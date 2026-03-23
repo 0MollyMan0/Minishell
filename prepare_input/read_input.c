@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:13:12 by anfouger          #+#    #+#             */
-/*   Updated: 2026/02/21 14:22:38 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/23 13:25:19 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 static int	verif_quotes(const char *str)
 {
-	int	count_one;
-	int	count_two;
 	int	i;
+	int flag_in_one;
+	int flag_in_two;
 
+	flag_in_one = 0;
+	flag_in_two = 0;
 	i = 0;
-	count_one = 0;
-	count_two = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
-			count_one++;
-		else if (str[i] == '\"')
-			count_two++;
+		if (str[i] == '\'' && flag_in_one)
+			flag_in_one = 0;
+		else if (str[i] == '\'' && !flag_in_one && !flag_in_two)
+			flag_in_one = 1;
+		else if (str[i] == '\"' && flag_in_two)
+			flag_in_two = 0;
+		else if (str[i] == '\"' && !flag_in_two && !flag_in_one)
+			flag_in_two = 1;
 		i++;
 	}
-	if (count_one % 2 != 0 || count_two % 2 != 0)
+	if (flag_in_one || flag_in_two)
 	{
 		printf("Error: Invalid use of quotes\n");
 		return (0);

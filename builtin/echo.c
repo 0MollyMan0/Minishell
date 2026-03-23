@@ -6,11 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:21:31 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/11 08:50:27 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/23 13:11:31 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+
 
 int	builtin_echo(char **argv)
 {
