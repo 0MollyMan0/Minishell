@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/17 13:24:11 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/23 13:38:09 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int		is_expandable(char c);
 int		is_char_var(char c);
 char	*get_var(char *str, int *i);
 char	*remove_quotes(char *str);
+int		contains_valid_quotes(char *str);
 
 // --- Utils Exec --- //
 int		is_slash_in(char *str);

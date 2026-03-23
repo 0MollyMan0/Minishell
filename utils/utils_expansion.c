@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 09:39:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/10 12:10:28 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/23 13:43:54 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,48 @@ char	*get_var(char *str, int *i)
 	return (var);
 }
 
-char	*remove_quotes(char *str)
-{
-	int		i;
-	int		j;
-	char	*new_str;
+// char	*remove_quotes(char *str)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	*new_str;
 
-	new_str = malloc(sizeof(char) * strlen(str) - 2 + 1);
-	if (!new_str)
+// 	new_str = malloc(sizeof(char) * strlen(str) - 2 + 1);
+// 	if (!new_str)
+// 		return (NULL);
+// 	i = 1;
+// 	j = 0;
+// 	while (str[i + 1])
+// 	{
+// 		new_str[j] = str[i];
+// 		i++;
+// 		j++;
+// 	}
+// 	new_str[j] = '\0';
+// 	free(str);
+// 	return (new_str);
+// }
+char *remove_quotes(char *str)
+{
+	char *res;
+	int i = 0;
+	int j = 0;
+	char quote = 0;
+
+	res = malloc(strlen(str) + 1);
+	if (!res)
 		return (NULL);
-	i = 1;
-	j = 0;
-	while (str[i + 1])
+	while (str[i])
 	{
-		new_str[j] = str[i];
+		if ((str[i] == '\'' || str[i] == '"') && quote == 0)
+			quote = str[i];
+		else if (str[i] == quote)
+			quote = 0;
+		else
+			res[j++] = str[i];
 		i++;
-		j++;
 	}
-	new_str[j] = '\0';
+	res[j] = '\0';
 	free(str);
-	return (new_str);
+	return res;
 }
