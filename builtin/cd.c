@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:21:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/12 10:15:27 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/23 14:54:18 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,19 @@ static void	change_oldpwd(char **envp)
 	free(var);
 }
 
+static int	cd_too_many_arg(void)
+{
+	write(2, "cd: too many arguments\n", 23);
+	return (2);
+}
+
 int	builtin_cd(char **argv, char **envp)
 {
 	char	*path;
 
 	change_oldpwd(envp);
+	if (argv[2])
+		return (cd_too_many_arg());
 	if (!argv[1])
 		path = get_env_value(envp, "HOME");
 	else
