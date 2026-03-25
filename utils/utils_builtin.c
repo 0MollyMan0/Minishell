@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/17 09:38:40 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/25 08:47:30 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ int	change_value(char **envp, char *key, char *str)
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_strncmp(envp[i], key, ft_strlen(key)) == 0)
+		if (ft_strncmp(envp[i], key, ft_strlen(key)) == 0
+			&& (envp[i][ft_strlen(key)] == '='
+				|| envp[i][ft_strlen(key)] == '\0'))
 		{
 			free(envp[i]);
 			envp[i] = ft_strdup(str);
