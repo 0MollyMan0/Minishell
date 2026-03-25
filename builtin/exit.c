@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:43 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/23 14:48:18 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/25 09:20:25 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	exit_too_many_arg(void)
 {
 	write(2, "exit: too many arguments\n", 25);
-	return (2);
+	return (1);
 }
 
 // static int	exit_no_arg(t_minish *minish)
