@@ -38,7 +38,7 @@ void	exec_single_builtin(t_minish *minish)
 	saved_stdin = dup(STDIN_FILENO);
 	if (minish->cmds->redirs)
 		apply_redirs(minish->cmds->redirs);
-	minish->g_exit_status = exec_builtin(minish->cmds, minish);
+	minish->g_exit_status = exec_builtin(minish->cmds, minish, 0);
 	dup2(saved_stdout, STDOUT_FILENO);
 	dup2(saved_stdin, STDIN_FILENO);
 	close(saved_stdout);
@@ -46,7 +46,7 @@ void	exec_single_builtin(t_minish *minish)
 }
 
 // We look for the right function to call //
-int	exec_builtin(t_cmd *cmd, t_minish *minish)
+int	exec_builtin(t_cmd *cmd, t_minish *minish, int is_child)
 {
 	if (ft_strncmp(cmd->argv[0], "cd", 3) == 0)
 		return (builtin_cd(cmd->argv, minish->envp));
@@ -61,6 +61,6 @@ int	exec_builtin(t_cmd *cmd, t_minish *minish)
 	if (ft_strncmp(cmd->argv[0], "env", 4) == 0)
 		return (builtin_env(minish->envp, cmd->argv));
 	if (ft_strncmp(cmd->argv[0], "exit", 5) == 0)
-		return (builtin_exit(minish, cmd->argv));
+		return (builtin_exit(minish, cmd->argv, is_child));
 	return (0);
 }

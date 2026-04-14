@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/23 13:38:09 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/14 10:16:04 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int		builtin_env(char **envp, char **argv);
 int		builtin_pwd(void);
 int		builtin_export(t_minish *minish, char **argv);
 int		builtin_unset(t_minish *minish, char **argv);
-int		builtin_exit(t_minish *minish, char **argv);
+int		builtin_exit(t_minish *minish, char **argv, int is_child);
 
 /* execve function */
 void	execute(t_minish *minish);
@@ -153,7 +153,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /* check builtins */
 void	exec_single_builtin(t_minish *minish);
-int		exec_builtin(t_cmd *cmd, t_minish *minish);
+int		exec_builtin(t_cmd *cmd, t_minish *minish, int is_child);
 int		is_builtin(char *cmd);
 
 /* count_cmds_and_pipes functions */

@@ -52,7 +52,7 @@ void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec)
 		exit(0);
 	if (is_builtin(cmd->argv[0]))
 	{
-		ret = exec_builtin(cmd, minish);
+		ret = exec_builtin(cmd, minish, 1);
 		exit(ret);
 	}
 	exec_external(cmd, minish->envp);
