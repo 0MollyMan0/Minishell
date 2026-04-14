@@ -42,21 +42,37 @@ static void	exec_single(t_minish *minish)
 }
 
 /* ---- Wait all pids with waitpid---- */
+// Old waitpid_all
+// static void	waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
+// {
+// 	int	i;
+// 	int	status;
 
-static void	waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
+// 	i = 0;
+// 	while (i < nb_cmds)
+// 	{
+// 		waitpid(pids[i], &status, 0);
+// 		if (WIFEXITED(status))
+// 		{
+// 			minish->g_exit_status = WEXITSTATUS(status);
+// 			g_exit_status = minish->g_exit_status;
+// 		}
+// 		i++;
+// 	}
+// }
+
+static void waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
 {
 	int	i;
 	int	status;
 
 	i = 0;
-	while (i < nb_cmds)
+	waitpid(pids[nb_cmds - 1], &status, 0);
+	if (WIFEXITED(status))
+		minish->g_exit_status = WEXITSTATUS(status);
+	while (i < nb_cmds - 1)
 	{
-		waitpid(pids[i], &status, 0);
-		if (WIFEXITED(status))
-		{
-			minish->g_exit_status = WEXITSTATUS(status);
-			g_exit_status = minish->g_exit_status;
-		}
+		waitpid(pids[i], NULL, 0);
 		i++;
 	}
 }

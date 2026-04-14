@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:21:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/25 09:20:45 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/14 11:13:23 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	change_oldpwd(char **envp)
 static int	cd_too_many_arg(void)
 {
 	write(2, "cd: too many arguments\n", 23);
-	return (1);
+	return (2);
 }
 
 int	builtin_cd(char **argv, char **envp)
