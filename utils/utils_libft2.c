@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:02:02 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/23 14:08:47 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/14 10:57:21 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,23 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 long	verif_max_long(char *s)
 {
-	long	result;
 	int		i;
+	int		sign;
+	long	res;
 
-	result = 0;
 	i = 0;
-	while (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13))
-		i++;
+	sign = 1;
+	res = 0;
 	if (s[i] == '+' || s[i] == '-')
-		i++;
+		if (s[i++] == '-')
+			sign = -1;
 	while (s[i] >= '0' && s[i] <= '9')
 	{
-		if (result > (LONG_MAX - (s[i] - '0')) / 10)
+		if (sign == 1 && res > (LONG_MAX - (s[i] - '0')) / 10)
 			return (0);
-		result = result * 10 + (s[i] - '0');
-		i++;
+		if (sign == -1 && res > (-(LONG_MIN + (s[i] - '0'))) / 10)
+			return (0);
+		res = res * 10 + (s[i++] - '0');
 	}
-	if (s[i] != '\0')
-		return (0);
-	return (result);
+	return (1);
 }
