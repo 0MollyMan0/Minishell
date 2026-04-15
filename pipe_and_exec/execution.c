@@ -30,7 +30,10 @@ static void	exec_single(t_minish *minish)
 	if (pid == 0)
 	{
 		if (minish->cmds->redirs)
-			apply_redirs(minish->cmds->redirs);
+		{
+			if (apply_redirs(minish->cmds->redirs))
+				exit(1);
+		}
 		exec_external(minish->cmds, minish->envp);
 	}
 	waitpid(pid, &status, 0);

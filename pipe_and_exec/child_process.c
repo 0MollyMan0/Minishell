@@ -46,7 +46,10 @@ void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec)
 
 	setup_pipes_child(i, exec->nb_cmds, exec->pipes);
 	if (cmd->redirs)
-		apply_redirs(cmd->redirs);
+	{
+		if (apply_redirs(cmd->redirs))
+			exit(1);
+	}
 	close_all_pipes(exec->pipes, exec->nb_cmds - 1);
 	if (!cmd->argv || !cmd->argv[0])
 		exit(0);

@@ -168,9 +168,9 @@ int		access_path(char *cmd);
 char	*find_path(char **envp);
 
 /* dup_and_redir functions */
-void	apply_redirs(t_redir *redirs);
-void	apply_redir_out(t_redir *redir);
-void	apply_redir_in(t_redir *redir);
+int		apply_redirs(t_redir *redirs);
+int		apply_redir_out(t_redir *redir);
+int		apply_redir_in(t_redir *redir);
 
 /* child process functions */
 void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec);
