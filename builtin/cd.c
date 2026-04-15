@@ -41,7 +41,7 @@ static void	change_oldpwd(char **envp)
 static int	cd_too_many_arg(void)
 {
 	write(2, "cd: too many arguments\n", 23);
-	return (2);
+	return (1);
 }
 
 int	builtin_cd(char **argv, char **envp)

@@ -15,7 +15,7 @@
 static int	exit_too_many_arg(void)
 {
 	write(2, "exit: too many arguments\n", 25);
-	return (2);
+	return (1);
 }
 
 static int	exit_numeric_error(char *arg)
