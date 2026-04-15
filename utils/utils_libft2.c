@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:02:02 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/14 10:57:21 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/15 14:19:13 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 long	verif_max_long(char *s)
 {
-	int		i;
-	int		sign;
-	long	res;
+	int			i;
+	int			sign;
+	long long	res;
 
 	i = 0;
 	sign = 1;
