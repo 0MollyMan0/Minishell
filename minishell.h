@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/15 14:19:02 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/15 14:52:16 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ char	*ft_strdup(const char *s);
 char	*ft_strndup(const char *s, int start, int end);
 char	*add_char(char *str, char c);
 int		ft_isspace(const char c);
+int		ft_isalnum(int x);
+int		ft_isdigit(int x);
+int		ft_isalpha(int x);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:14 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/25 08:51:12 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/15 15:28:42 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	verif_export(char *str)
 		|| (str[i] >= 'A' && str[i] <= 'Z')
 		|| (str[i] >= 'a' && str[i] <= 'z'))
 	{
-		while (str[i] == '_' || isalnum(str[i]))
+		while (str[i] == '_' || ft_isalnum(str[i]))
 		{
 			if (str[i + 1] == '\0' 
 				|| (str[i + 1] == '=' && str[i + 2]))
