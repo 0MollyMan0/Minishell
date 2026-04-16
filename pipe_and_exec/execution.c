@@ -64,20 +64,23 @@ static void	exec_single(t_minish *minish)
 // 	}
 // }
 
-static void waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
+static void	waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
 {
 	int	i;
 	int	status;
+	int	last_status;
 
 	i = 0;
-	waitpid(pids[nb_cmds - 1], &status, 0);
-	if (WIFEXITED(status))
-		minish->g_exit_status = WEXITSTATUS(status);
-	while (i < nb_cmds - 1)
+	last_status = 0;
+	while (i < nb_cmds)
 	{
-		waitpid(pids[i], NULL, 0);
+		waitpid(pids[i], &status, 0);
+		if (i == nb_cmds - 1 && WIFEXITED(status))
+			last_status = WEXITSTATUS(status);
 		i++;
 	}
+	minish->g_exit_status = last_status;
+	g_exit_status = last_status;
 }
 
 /* ---- Multi command execution (atleast 1 pipe)---- */

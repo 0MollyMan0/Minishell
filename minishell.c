@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/14 11:50:50 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/16 10:42:07 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int ac, char **av, char **envp)
 		minish.tokens = tokenize(minish.input);
 		if (g_exit_status)
 			minish.g_exit_status = g_exit_status;
-		minish.cmds = expansion(minish, parser(minish.tokens));
+		minish.cmds = expansion(minish, parser(&minish, minish.tokens));
 		execute(&minish);
 		free_all(&minish);
 	}

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/16 09:43:29 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/16 09:57:26 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	var_case(char **envp, char *str, char **new_str, int *i)
 	int		i_var;
 
 	i_var = 0;
-	var = get_var(envp, str, *(&i));
+	var = get_var(envp, str, i);
 	if (!var)
 		*new_str = NULL;
 	while (var && var[i_var])
