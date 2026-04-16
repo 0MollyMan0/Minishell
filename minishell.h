@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/16 10:41:38 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/16 14:53:45 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char	*ft_itoa(int n);
 int		tab_len(char **tab);
 long	ft_atol(char *str);
 int		verif_long(char *s);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 // --- Utils Tab --- //
 void	free_tab(char **s);

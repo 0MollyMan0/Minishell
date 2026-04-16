@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/16 11:54:00 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/16 15:12:39 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,9 @@ static char	*create_new_arg(char *str, t_minish minish)
 
 	i = 0;
 	flag_quote = 0;
-	new_str = malloc(sizeof(char) * 1);
+	new_str = ft_calloc(sizeof(char), 1);
 	if (!new_str)
 		return (NULL);
-	new_str[0] = '\0';
 	while (str[i])
 	{
 		flag_quote = in_or_out_simple_quote(str[i], flag_quote);
@@ -103,8 +102,7 @@ t_cmd	*expansion(t_minish minish, t_cmd *cmds)
 		i = 0;
 		while (p_cmds->argv[i])
 		{
-			if (p_cmds->argv[i][0] != '\'')
-				p_cmds->argv[i] = create_new_arg(p_cmds->argv[i], minish);
+			p_cmds->argv[i] = create_new_arg(p_cmds->argv[i], minish);
 			p_cmds->argv[i] = remove_quotes(p_cmds->argv[i]);
 			i++;
 		}

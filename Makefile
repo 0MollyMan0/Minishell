@@ -57,6 +57,7 @@ SRCS    = minishell.c \
 		$(UTILS_DIR)/ft_itoa.c \
 		$(UTILS_DIR)/ft_atol.c \
 		$(UTILS_DIR)/ft_is.c \
+		$(UTILS_DIR)/ft_calloc.c \
 		$(UTILS_DIR)/verif_long.c \
 		$(UTILS_DIR)/utils_token.c \
 		$(UTILS_DIR)/utils_cmd.c \
