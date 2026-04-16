@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 09:39:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/23 13:43:54 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/16 09:36:29 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_char_var(char c)
 	return (0);
 }
 
-char	*get_var(char *str, int *i)
+char	*get_var(char **envp, char *str, int *i)
 {
 	char	*var_name;
 	char	*var;
@@ -51,7 +51,7 @@ char	*get_var(char *str, int *i)
 		i_name++;
 	}
 	var_name[i_name] = '\0';
-	var = getenv(var_name);
+	var = get_env_value(envp, var_name);
 	if (!var)
 		var = "";
 	free(var_name);

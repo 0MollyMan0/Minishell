@@ -6,19 +6,19 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/23 13:54:22 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/16 09:43:29 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	var_case(char *str, char **new_str, int	*i)
+static void	var_case(char **envp, char *str, char **new_str, int *i)
 {
 	char	*var;
 	int		i_var;
 
 	i_var = 0;
-	var = get_var(str, *(&i));
+	var = get_var(envp, str, *(&i));
 	if (!var)
 		*new_str = NULL;
 	while (var && var[i_var])
@@ -46,7 +46,7 @@ static void	do_expansion(char **str, char **new_str, int *i, t_minish minish)
 		*i += 1;
 	}
 	else
-		var_case(*str, *(&new_str), *(&i));
+		var_case(minish.envp, *str, new_str, i);
 	if (!*str || !*new_str)
 	{
 		*new_str = NULL;
