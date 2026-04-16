@@ -20,24 +20,6 @@ void	setup_pipes_child(int i, int nb_cmds, int **pipes)
 		dup2(pipes[i][1], STDOUT_FILENO);
 }
 
-// void	exec_external(t_cmd *cmd, char **envp)
-// {
-// 	char	*path;
-
-// 	path = resolve_cmd(cmd->argv[0], envp);
-// 	if (!path)
-// 	{
-// 		ft_putstr_fd("minishell: command not found: ", 2);
-// 		ft_putstr_fd(cmd->argv[0], 2);
-// 		ft_putstr_fd("\n", 2);
-// 		exit(127);
-// 	}
-// 	execve(path, cmd->argv, envp);
-// 	perror(path);
-// 	free(path);
-// 	exit(1);
-// }
-
 static void	perm_or_dir(int i, char **path)
 {
 	if (i == 0)
@@ -58,11 +40,10 @@ static void	perm_or_dir(int i, char **path)
 	}
 }
 
-
 void	exec_external(t_cmd *cmd, char **envp)
 {
 	char		*path;
-	struct		stat st;
+	struct stat	st;
 
 	path = resolve_cmd(cmd->argv[0], envp);
 	if (!path)
@@ -81,8 +62,6 @@ void	exec_external(t_cmd *cmd, char **envp)
 	free(path);
 	exit(1);
 }
-
-/* ---- Child process ---- */
 
 void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec)
 {

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:14 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/16 10:04:34 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/16 15:30:07 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	verif_export(char *str)
 	{
 		while (str[i] == '_' || ft_isalnum(str[i]))
 		{
-			if (str[i + 1] == '\0' 
+			if (str[i + 1] == '\0'
 				|| (str[i + 1] == '=' && str[i + 2]))
 				return (1);
 			i++;
@@ -63,7 +63,7 @@ static int	export_invalid_id(char *argv)
 	(void)argv;
 	write(2, "export: ", 8);
 	write(2, "not a valid identifier\n", 23);
-	return (1);	
+	return (1);
 }
 
 int	builtin_export(t_minish *minish, char **argv)

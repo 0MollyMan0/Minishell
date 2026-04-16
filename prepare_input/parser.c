@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 08:41:11 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/16 10:51:14 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/16 15:29:52 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_cmd	*parser(t_minish *minish, t_token *tokens)
 
 	cmds = NULL;
 	if (!verif_syntax(tokens))
-		return (syntax_error(minish , cmds));
+		return (syntax_error(minish, cmds));
 	while (tokens)
 	{
 		current = new_cmd();

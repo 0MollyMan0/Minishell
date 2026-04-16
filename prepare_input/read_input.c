@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:13:12 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/23 13:25:19 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/16 15:27:46 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static int	verif_quotes(const char *str)
 {
 	int	i;
-	int flag_in_one;
-	int flag_in_two;
+	int	flag_in_one;
+	int	flag_in_two;
 
 	flag_in_one = 0;
 	flag_in_two = 0;

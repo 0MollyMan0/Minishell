@@ -38,10 +38,7 @@ static void	exec_single(t_minish *minish)
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-	{
 		minish->g_exit_status = WEXITSTATUS(status);
-		g_exit_status = minish->g_exit_status;
-	}
 }
 
 /* ---- Wait all pids with waitpid---- */
@@ -63,7 +60,6 @@ static void	exec_single(t_minish *minish)
 // 		i++;
 // 	}
 // }
-
 static void	waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
 {
 	int	i;
@@ -84,7 +80,6 @@ static void	waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
 }
 
 /* ---- Multi command execution (atleast 1 pipe)---- */
-
 static int	fork_all(t_minish *minish, t_exec *exec, pid_t *pids)
 {
 	t_cmd	*cur;
