@@ -20,9 +20,49 @@ void	setup_pipes_child(int i, int nb_cmds, int **pipes)
 		dup2(pipes[i][1], STDOUT_FILENO);
 }
 
+// void	exec_external(t_cmd *cmd, char **envp)
+// {
+// 	char	*path;
+
+// 	path = resolve_cmd(cmd->argv[0], envp);
+// 	if (!path)
+// 	{
+// 		ft_putstr_fd("minishell: command not found: ", 2);
+// 		ft_putstr_fd(cmd->argv[0], 2);
+// 		ft_putstr_fd("\n", 2);
+// 		exit(127);
+// 	}
+// 	execve(path, cmd->argv, envp);
+// 	perror(path);
+// 	free(path);
+// 	exit(1);
+// }
+
+static void	perm_or_dir(int i, char **path)
+{
+	if (i == 0)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(*path, 2);
+		ft_putstr_fd(": Is a directory\n", 2);
+		free(*path);
+		exit(126);
+	}
+	if (i == 1)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(*path, 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+		free(*path);
+		exit(126);
+	}
+}
+
+
 void	exec_external(t_cmd *cmd, char **envp)
 {
-	char	*path;
+	char		*path;
+	struct		stat st;
 
 	path = resolve_cmd(cmd->argv[0], envp);
 	if (!path)
@@ -32,8 +72,12 @@ void	exec_external(t_cmd *cmd, char **envp)
 		ft_putstr_fd("\n", 2);
 		exit(127);
 	}
+	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
+		perm_or_dir(0, &path);
+	if (access(path, X_OK) != 0)
+		perm_or_dir(1, &path);
 	execve(path, cmd->argv, envp);
-	perror(path);
+	perror("execve");
 	free(path);
 	exit(1);
 }
