@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:21:31 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/14 11:49:44 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/16 11:58:13 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	builtin_echo(char **argv)
 			printf(" ");
 		i++;
 	}
-	if (!flag)
-		printf("\n");
+	// if (!flag)
+	printf("\n");
 	return (0);
 }
