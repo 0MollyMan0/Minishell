@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:43 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/15 14:19:26 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/16 09:33:26 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	exit_not_child(t_minish *minish, char **argv)
 {
 	long	arg;
 	
-	if (argv[2])
+	if (argv[1] && argv[2])
 		return (exit_too_many_arg());
 	if (!argv[1])
 	{
