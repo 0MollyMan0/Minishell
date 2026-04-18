@@ -1,10 +1,8 @@
-# Minishell
-
-
 *This project has been created as part
 of the 42 curriculum by anfouger, jemonthi.*
+# Minishell
 
-# Description
+## Description
 
 Minishell is a 42 project where you have to recreate a shell. You will need a working history, Display a promps when waiting for a new command, search and launch the right executable.  
 
@@ -41,7 +39,7 @@ foreground pipeline.
 
 
 
-# Instructions
+## Instructions
 
 To compile all the files just run **make** at the root of the repository.
 
@@ -64,7 +62,8 @@ If you want to leave the minishell, just type :
 > exit
 
 you will be back to the main shell.
-# Ressources
+
+## Ressources
 
 Here are some documentations we have read/watched during the project (we didn't save all of the website we went tbh):
 
