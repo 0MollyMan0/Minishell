@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/25 08:47:30 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/18 18:01:21 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 char	*get_env_value(char **envp, char *str)
 {
-	int	i;
+	int		i;
+	int		start;
+	int		end;
+	char	*test;
 
 	i = 0;
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], str, ft_strlen(str)) == 0
 			&& envp[i][ft_strlen(str)] == '=')
-			return (envp[i] + ft_strlen(str) + 1);
+		{
+			start = ft_strlen(str) + 1;
+			end = ft_strlen(envp[i]);
+			test = ft_strndup(envp[i], start, end);
+			return (test);
+		}
 		i++;
 	}
 	return (NULL);

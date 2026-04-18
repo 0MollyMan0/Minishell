@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:21:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/14 11:13:23 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/18 18:02:45 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ int	builtin_cd(char **argv, char **envp)
 {
 	char	*path;
 
-	change_oldpwd(envp);
 	if (argv[2])
 		return (cd_too_many_arg());
 	if (!argv[1])
 		path = get_env_value(envp, "HOME");
+	else if (ft_strcmp(argv[1], "-"))
+		path = get_env_value(envp, "OLDPWD");		
 	else
 		path = argv[1];
+	change_oldpwd(envp);
 	if (!path)
 		return (1);
 	if (chdir(path) == -1)
