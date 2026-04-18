@@ -86,7 +86,6 @@ void	exec_external(t_cmd *cmd, char **envp)
 }
 
 /* ---- Child process ---- */
-
 void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec)
 {
 	int	ret;

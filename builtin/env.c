@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/17 13:25:43 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/18 10:14:53 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int	builtin_env(char **envp, char **argv)
 	i = 0;
 	if (argv[1])
 	{
-		printf("env: '%s': No such file or directory\n", argv[1]);
+		ft_putstr_fd("env: '", 2);
+		ft_putstr_fd(argv[1], 2);
+		ft_putstr_fd("': No such file or directory\n", 2);
 		return (127);
 	}
 	while (envp[i])
