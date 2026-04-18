@@ -40,7 +40,7 @@ void	exec_single_builtin(t_minish *minish)
 	{
 		if (apply_redirs(minish->cmds->redirs))
 		{
-			minish->g_exit_status = 1;
+			minish->exit_status = 1;
 			dup2(saved_stdin, STDIN_FILENO);
 			dup2(saved_stdout, STDOUT_FILENO);
 			close(saved_stdin);
@@ -48,7 +48,7 @@ void	exec_single_builtin(t_minish *minish)
 			return ;
 		}
 	}
-	minish->g_exit_status = exec_builtin(minish->cmds, minish, 0);
+	minish->exit_status = exec_builtin(minish->cmds, minish, 0);
 	dup2(saved_stdout, STDOUT_FILENO);
 	dup2(saved_stdin, STDIN_FILENO);
 	close(saved_stdout);

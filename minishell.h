@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/18 19:00:37 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/18 19:36:19 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int		contains_valid_quotes(char *str);
 // --- Utils Exec --- //
 int		is_slash_in(char *str);
 int		is_builtin(char *cmd);
+void	end_of_exec_single(t_minish *minish, int status);
 
 // --- Utils Builtin --- //
 char	*get_env_value(char **envp, char *str);

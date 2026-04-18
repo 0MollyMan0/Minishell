@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/23 13:54:22 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/18 19:09:18 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	do_expansion(char **str, char **new_str, int *i, t_minish minish)
 	*i += 1;
 	if ((*str)[*i] == '?')
 	{
-		value = ft_itoa(minish.g_exit_status);
+		value = ft_itoa(minish.exit_status);
 		tmp = ft_strjoin(*new_str, value);
 		free(*new_str);
 		*new_str = tmp;

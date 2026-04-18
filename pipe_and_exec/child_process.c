@@ -91,6 +91,8 @@ void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec)
 	int	ret;
 
 	signal(SIGPIPE, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	setup_pipes_child(i, exec->nb_cmds, exec->pipes);
 	if (cmd->redirs)
 	{

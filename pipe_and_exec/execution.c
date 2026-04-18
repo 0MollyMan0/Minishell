@@ -27,18 +27,53 @@ static void	exec_single(t_minish *minish)
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGPIPE, SIG_DFL);
 		if (minish->cmds->redirs)
 		{
 			if (apply_redirs(minish->cmds->redirs))
-				exit(1);
+				_exit(1);
 		}
-		signal(SIGPIPE, SIG_DFL);
 		exec_external(minish->cmds, minish->envp);
+		_exit(1);
 	}
 	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
+	if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGINT)
+			write(1, "\n", 1);
+		minish->exit_status = 128 + WTERMSIG(status);
+	}
+	else if (WIFEXITED(status))
 		minish->exit_status = WEXITSTATUS(status);
 }
+
+// static void	exec_single(t_minish *minish)
+// {
+// 	pid_t	pid;
+// 	int		status;
+
+// 	if (is_builtin(minish->cmds->argv[0]))
+// 	{
+// 		exec_single_builtin(minish);
+// 		return ;
+// 	}
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		if (minish->cmds->redirs)
+// 		{
+// 			if (apply_redirs(minish->cmds->redirs))
+// 				exit(1);
+// 		}
+// 		signal(SIGPIPE, SIG_DFL);
+// 		exec_external(minish->cmds, minish->envp);
+// 	}
+// 	waitpid(pid, &status, 0);
+// 	if (WIFEXITED(status))
+// 		minish->exit_status = WEXITSTATUS(status);
+// }
 /* we waitpid all the pids and we check the status and 
  * if we got a signal for pipes */
 
