@@ -21,16 +21,16 @@ Minishell is a 42 project where you have to recreate a shell. You will need a wo
 delimiter is seen. However, it doesn’t have to update the history!  
 ◦ >> should redirect output in append mode.  
 
-**Implement pipes (| character). The output of each command in the pipeline is
-connected to the input of the next command via a pipe.**  
+Implement **pipes** (| character). The output of each command in the pipeline is
+connected to the input of the next command via a pipe.  
 
-**Handle environment variables (followed by a sequence of characters) which
-should expand to their values.**  
+Handle **environment variables** (followed by a sequence of characters) which
+should expand to their values. 
 
-**Handle $? which should expand to the exit status of the most recently executed
-foreground pipeline.**  
+Handle **$?** which should expand to the exit status of the most recently executed
+foreground pipeline. 
 
-**The shell must implement the following built-in commands**:  
+### **The shell must implement the following built-in commands**:  
 ◦ echo with option -n  
 ◦ cd with only a relative or absolute path  
 ◦ pwd with no options  
@@ -68,8 +68,11 @@ you will be back to the main shell.
 
 Here are some documentations we have read/watched during the project (we didn't save all of the website we went tbh):
 
-- https://www.youtube.com/watch?v=IGW8-yeYRgI
-- https://codesignal.com/learn/courses/bash-script-error-handling/lessons/understanding-exit-statuses
-- https://man7.org/linux/man-pages/man3/errno.3.html
+- [GDB Debugging with fork() and exec() - Jacob Sorber - Youtube](https://www.youtube.com/watch?v=IGW8-yeYRgI)
+- [Course on Bash script error handling - CodeSignal](https://codesignal.com/learn/courses/bash-script-error-handling/lessons/understanding-exit-statuses)
+- [errno(3) - Linux manual page](https://man7.org/linux/man-pages/man3/errno.3.html)
+- [Comprehensive guide on lexer and parsing - Flash - Medium](https://medium.com/@august1.caes/minishell-a-comprehensive-guide-24cb30a342ec)
+
+AI was used to explain a new concept and speed up the debugging process. It was also used to optimize code size.
 
 Most of the *man* of the allowed functions has been reviewed too.
