@@ -6,19 +6,19 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/16 15:28:00 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/03/23 13:54:22 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	var_case(char **envp, char *str, char **new_str, int *i)
+static void	var_case(char *str, char **new_str, int	*i)
 {
 	char	*var;
 	int		i_var;
 
 	i_var = 0;
-	var = get_var(envp, str, i);
+	var = get_var(str, *(&i));
 	if (!var)
 		*new_str = NULL;
 	while (var && var[i_var])
@@ -46,7 +46,12 @@ static void	do_expansion(char **str, char **new_str, int *i, t_minish minish)
 		*i += 1;
 	}
 	else
-		var_case(minish.envp, *str, new_str, i);
+		var_case(*str, *(&new_str), *(&i));
+	if (!*str || !*new_str)
+	{
+		*new_str = NULL;
+		*str = NULL;
+	}
 }
 
 static int	in_or_out_simple_quote(char c, int flag_quote)
@@ -66,9 +71,10 @@ static char	*create_new_arg(char *str, t_minish minish)
 
 	i = 0;
 	flag_quote = 0;
-	new_str = ft_calloc(sizeof(char), 1);
+	new_str = malloc(sizeof(char) * 1);
 	if (!new_str)
 		return (NULL);
+	new_str[0] = '\0';
 	while (str[i])
 	{
 		flag_quote = in_or_out_simple_quote(str[i], flag_quote);
@@ -97,7 +103,8 @@ t_cmd	*expansion(t_minish minish, t_cmd *cmds)
 		i = 0;
 		while (p_cmds->argv[i])
 		{
-			p_cmds->argv[i] = create_new_arg(p_cmds->argv[i], minish);
+			if (p_cmds->argv[i][0] != '\'')
+				p_cmds->argv[i] = create_new_arg(p_cmds->argv[i], minish);
 			p_cmds->argv[i] = remove_quotes(p_cmds->argv[i]);
 			i++;
 		}

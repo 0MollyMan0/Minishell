@@ -13,6 +13,7 @@
 #include "minishell.h"
 
 /* some test had quotes still in filename so we remove them*/
+
 char	*remove_quotes_filename(char *str)
 {
 	char	*res;

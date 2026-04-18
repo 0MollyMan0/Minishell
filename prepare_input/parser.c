@@ -6,16 +6,15 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 08:41:11 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/16 15:29:52 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/02/21 14:45:10 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static t_cmd	*syntax_error(t_minish *minish, t_cmd *cmds)
+static t_cmd	*syntax_error(t_cmd *cmds)
 {
-	write(2, "minishell: syntax error\n", 24);
-	minish->g_exit_status = 2;
+	printf("minishell: syntax error\n");
 	free_cmds(cmds);
 	return (NULL);
 }
@@ -69,14 +68,14 @@ static t_token	*create_command(t_token *tokens, t_cmd *current)
 	return (tokens->next);
 }
 
-t_cmd	*parser(t_minish *minish, t_token *tokens)
+t_cmd	*parser(t_token *tokens)
 {
 	t_cmd	*cmds;
 	t_cmd	*current;
 
 	cmds = NULL;
 	if (!verif_syntax(tokens))
-		return (syntax_error(minish, cmds));
+		return (syntax_error(cmds));
 	while (tokens)
 	{
 		current = new_cmd();

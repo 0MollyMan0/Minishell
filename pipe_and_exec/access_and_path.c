@@ -26,18 +26,23 @@ char	*find_path(char **envp)
 	return (NULL);
 }
 
-/* check path access and return value depends on what */
-
-int	access_path(char *cmd)
-{
-	if (cmd[0] != '/' && cmd[0] != '.')
-		return (0);
-	if (access(cmd, X_OK) == 0)
-		return (1);
-	return (-1);
-}
-
 /* find the command access and returns the full path if access is OK */
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if ((char)c == '\0')
+		return ((char *)&s[i]);
+	return (NULL);
+}
 
 char	*resolve_cmd(char *cmd, char **envp)
 {
@@ -46,10 +51,10 @@ char	*resolve_cmd(char *cmd, char **envp)
 	char	*full_path;
 	int		i;
 
-	if (access_path(cmd) == 1)
-		return (ft_strdup(cmd));
-	if (access_path(cmd) == -1)
+	if (!cmd || cmd[0] == '\0')
 		return (NULL);
+	if (ft_strchr(cmd, '/'))
+		return (ft_strdup(cmd));
 	path_env = find_path(envp);
 	if (!path_env)
 		return (NULL);
@@ -60,7 +65,7 @@ char	*resolve_cmd(char *cmd, char **envp)
 	while (all_path[i])
 	{
 		full_path = ft_strjoin_three(all_path[i], "/", cmd);
-		if (access(full_path, X_OK) == 0)
+		if (access(full_path, F_OK) == 0)
 			return (ft_free_split(all_path), full_path);
 		free(full_path);
 		i++;

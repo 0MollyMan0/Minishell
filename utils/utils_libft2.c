@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:02:02 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/16 12:09:01 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/14 10:57:21 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 	size_t	i;
 
 	i = 0;
-	if (s1[i] == '\0' && s2[i] != '\0')
-		return (0);
 	while (s1[i])
 	{
 		if ((unsigned char)s1[i] == (unsigned char)s2[i])
@@ -46,9 +44,9 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 long	verif_max_long(char *s)
 {
-	int			i;
-	int			sign;
-	long long	res;
+	int		i;
+	int		sign;
+	long	res;
 
 	i = 0;
 	sign = 1;

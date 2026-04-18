@@ -20,53 +20,78 @@ void	setup_pipes_child(int i, int nb_cmds, int **pipes)
 		dup2(pipes[i][1], STDOUT_FILENO);
 }
 
-static void	perm_or_dir(int i, char **path)
+void	check_ret_value(int ret, char *path, t_cmd *cmd, char **envp)
 {
-	if (i == 0)
+	if (ret == -1)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(*path, 2);
-		ft_putstr_fd(": Is a directory\n", 2);
-		free(*path);
-		exit(126);
+		if (errno == EACCES)
+		{
+			ft_putstr_fd("minishell: Permission denied\n", 2);
+			exit (126);
+		}
+		else if (errno == ENOENT)
+		{
+			ft_putstr_fd("minishell: No such file or directory\n", 2);
+			exit (127);
+		}
+		else if (errno == ENOEXEC)
+		{
+			if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
+				execve("/bin/sh", cmd->argv, envp);
+			else
+				execve("/bin/sh", (char *[]){"sh", path, NULL}, envp);
+		}
 	}
-	if (i == 1)
+}
+
+void	check_access(t_cmd *cmd)
+{
+	int	fd;
+
+	if (access(cmd->argv[0], F_OK) == 0)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(*path, 2);
-		ft_putstr_fd(": Permission denied\n", 2);
-		free(*path);
-		exit(126);
+		fd = open(cmd->argv[0], O_DIRECTORY);
+		if (fd != -1)
+		{
+			close(fd);
+			ft_putstr_fd("minishell: Is a directory\n", 2);
+			exit (126);
+		}
 	}
 }
 
 void	exec_external(t_cmd *cmd, char **envp)
 {
-	char		*path;
-	struct stat	st;
+	char	*path;
+	int		ret;
 
-	path = resolve_cmd(cmd->argv[0], envp);
-	if (!path)
+	if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
 	{
-		ft_putstr_fd("minishell: command not found: ", 2);
-		ft_putstr_fd(cmd->argv[0], 2);
-		ft_putstr_fd("\n", 2);
-		exit(127);
+		check_access(cmd);
+		ret = execve(cmd->argv[0], cmd->argv, envp);
 	}
-	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
-		perm_or_dir(0, &path);
-	if (access(path, X_OK) != 0)
-		perm_or_dir(1, &path);
-	execve(path, cmd->argv, envp);
-	perror("execve");
+	else
+	{
+		path = resolve_cmd(cmd->argv[0], envp);
+		if (!path)
+		{
+			ft_putstr_fd("minishell: command not found\n", 2);
+			exit(127);
+		}
+		ret = execve(path, cmd->argv, envp);
+	}
+	check_ret_value(ret, path, cmd, envp);
 	free(path);
 	exit(1);
 }
+
+/* ---- Child process ---- */
 
 void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec)
 {
 	int	ret;
 
+	signal(SIGPIPE, SIG_DFL);
 	setup_pipes_child(i, exec->nb_cmds, exec->pipes);
 	if (cmd->redirs)
 	{
@@ -74,7 +99,7 @@ void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec)
 			exit(1);
 	}
 	close_all_pipes(exec->pipes, exec->nb_cmds - 1);
-	if (!cmd->argv || !cmd->argv[0])
+	if (!cmd->argv || !cmd->argv[0] || cmd->argv[0][0] == '\0')
 		exit(0);
 	if (is_builtin(cmd->argv[0]))
 	{

@@ -19,8 +19,6 @@ static void	exec_single(t_minish *minish)
 	pid_t	pid;
 	int		status;
 
-	if (!minish->cmds->argv || !minish->cmds->argv[0])
-		return ;
 	if (is_builtin(minish->cmds->argv[0]))
 	{
 		exec_single_builtin(minish);
@@ -34,52 +32,46 @@ static void	exec_single(t_minish *minish)
 			if (apply_redirs(minish->cmds->redirs))
 				exit(1);
 		}
+		signal(SIGPIPE, SIG_DFL);
 		exec_external(minish->cmds, minish->envp);
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		minish->g_exit_status = WEXITSTATUS(status);
 }
+/* we waitpid all the pids and we check the status and 
+ * if we got a signal for pipes */
 
-/* ---- Wait all pids with waitpid---- */
-// Old waitpid_all
-// static void	waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
-// {
-// 	int	i;
-// 	int	status;
-
-// 	i = 0;
-// 	while (i < nb_cmds)
-// 	{
-// 		waitpid(pids[i], &status, 0);
-// 		if (WIFEXITED(status))
-// 		{
-// 			minish->g_exit_status = WEXITSTATUS(status);
-// 			g_exit_status = minish->g_exit_status;
-// 		}
-// 		i++;
-// 	}
-// }
 static void	waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
 {
 	int	i;
 	int	status;
-	int	last_status;
+	int	signal;
+	int	written;
 
 	i = 0;
-	last_status = 0;
+	written = 0;
 	while (i < nb_cmds)
 	{
 		waitpid(pids[i], &status, 0);
-		if (i == nb_cmds - 1 && WIFEXITED(status))
-			last_status = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+		{
+			signal = WTERMSIG(status);
+			if (signal == SIGPIPE && !written)
+			{
+				ft_putstr_fd("minishell: Broken pipe\n", 2);
+				written = 1;
+			}
+			minish->g_exit_status = 128 + signal;
+		}
+		else if (WIFEXITED(status))
+			minish->g_exit_status = WEXITSTATUS(status);
 		i++;
 	}
-	minish->g_exit_status = last_status;
-	g_exit_status = last_status;
 }
 
 /* ---- Multi command execution (atleast 1 pipe)---- */
+
 static int	fork_all(t_minish *minish, t_exec *exec, pid_t *pids)
 {
 	t_cmd	*cur;
@@ -122,17 +114,28 @@ static void	exec_multi(t_minish *minish, t_exec *exec)
 	free_pipes(exec->pipes, exec->nb_cmds - 1);
 	free(pids);
 }
-
 /* ---- Main execute function ---- */
 
 void	execute(t_minish *minish)
 {
 	t_exec	exec;
+	t_cmd	*cur;
 
-	prepare_heredoc(minish->cmds);
+	cur = minish->cmds;
+	signal(SIGPIPE, SIG_IGN);
+	while (cur)
+	{
+		remove_empty_argv(cur);
+		cur = cur->next;
+	}
+	prepare_heredoc(minish, minish->cmds);
 	exec.nb_cmds = count_cmds(minish->cmds);
 	if (exec.nb_cmds == 1)
 	{
+		if (!minish->cmds->argv || !minish->cmds->argv[0]
+			|| (minish->cmds->argv[0][0] == '\0'
+			&& minish->cmds->argv[1] == NULL))
+			return ;
 		exec_single(minish);
 		return ;
 	}

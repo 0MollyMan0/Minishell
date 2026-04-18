@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/16 15:29:10 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/14 10:16:04 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 typedef enum e_token_type
 {
@@ -80,9 +81,6 @@ char	*ft_strdup(const char *s);
 char	*ft_strndup(const char *s, int start, int end);
 char	*add_char(char *str, char c);
 int		ft_isspace(const char c);
-int		ft_isalnum(int x);
-int		ft_isdigit(int x);
-int		ft_isalpha(int x);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
@@ -90,8 +88,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
 int		tab_len(char **tab);
 long	ft_atol(char *str);
-int		verif_long(char *s);
-void	*ft_calloc(size_t nmemb, size_t size);
+long	verif_max_long(char *s);
 
 // --- Utils Tab --- //
 void	free_tab(char **s);
@@ -111,7 +108,7 @@ void	add_redir(t_cmd *cmd, t_token_type type, char *filename);
 // --- Utils Expansion --- //
 int		is_expandable(char c);
 int		is_char_var(char c);
-char	*get_var(char **envp, char *str, int *i);
+char	*get_var(char *str, int *i);
 char	*remove_quotes(char *str);
 int		contains_valid_quotes(char *str);
 
@@ -132,7 +129,7 @@ void	setup_signals(void);
 // --- Prepare Input --- //
 char	*read_input(void);
 t_token	*tokenize(const char *input);
-t_cmd	*parser(t_minish *minish, t_token *tokens);
+t_cmd	*parser(t_token *tokens);
 t_cmd	*expansion(t_minish minish, t_cmd *cmds);
 
 // // --- Exec --- //
@@ -187,11 +184,17 @@ void	free_cmds(t_cmd *cmds);
 void	ft_free_split(char **split);
 
 // --- Heredoc --- //
-void	prepare_heredoc(t_cmd *cmds);
+void	prepare_heredoc(t_minish *minish, t_cmd *cmds);
+
+/* remove empty argv */
+
+void	remove_empty_argv(t_cmd *cmd);
+int		count_non_empty(char **argv);
 
 void	exit_minish(void);
 
 /* global variable for SIGNAL */
-extern int	g_exit_status;
+
+extern int	g_signal;
 
 #endif
