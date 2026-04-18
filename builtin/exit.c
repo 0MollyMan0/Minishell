@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:43 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/14 11:31:16 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/18 19:00:37 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	exit_not_child(t_minish *minish, char **argv)
 	{
 		free_all(minish);
 		free_tab(minish->envp);
-		exit(minish->g_exit_status);
+		exit(minish->exit_status);
 	}
 	if (!is_code_exit(argv[1]) || !verif_max_long(argv[1]))
 	{
@@ -81,7 +81,7 @@ int	builtin_exit(t_minish *minish, char **argv, int is_child)
 	else
 	{
 		if (!argv[1])
-			exit(minish->g_exit_status);
+			exit(minish->exit_status);
 		if (!is_code_exit(argv[1]) || !verif_max_long(argv[1]))
 			exit_numeric_error(argv[1]);
 		if (argv[2])

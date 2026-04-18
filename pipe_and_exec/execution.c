@@ -37,7 +37,7 @@ static void	exec_single(t_minish *minish)
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		minish->g_exit_status = WEXITSTATUS(status);
+		minish->exit_status = WEXITSTATUS(status);
 }
 /* we waitpid all the pids and we check the status and 
  * if we got a signal for pipes */
@@ -62,10 +62,10 @@ static void	waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
 				ft_putstr_fd("minishell: Broken pipe\n", 2);
 				written = 1;
 			}
-			minish->g_exit_status = 128 + signal;
+			minish->exit_status = 128 + signal;
 		}
 		else if (WIFEXITED(status))
-			minish->g_exit_status = WEXITSTATUS(status);
+			minish->exit_status = WEXITSTATUS(status);
 		i++;
 	}
 }
