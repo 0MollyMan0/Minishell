@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 08:00:14 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/19 11:53:16 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int		verif_long(char *s);
 int		ft_isalnum(int x);
 int		ft_isalpha(int x);
 int		ft_isdigit(int x);
+void	*ft_memset(void *s, int c, size_t n);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 // --- Utils Tab --- //
 void	free_tab(char **s);

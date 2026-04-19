@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 09:39:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 07:48:36 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/19 11:53:51 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*get_var(char **envp, char *str, int *i)
 	var_name[i_name] = '\0';
 	var = get_env_value(envp, var_name);
 	if (!var)
-		var = "";
+		var = calloc(sizeof(char), 1);
 	free(var_name);
 	return (var);
 }
