@@ -43,8 +43,6 @@ int	main(int ac, char **av, char **envp)
 			minish.exit_status = g_signal;
 		minish.cmds = expansion(minish, parser(&minish, minish.tokens));
 		signal(SIGINT, SIG_IGN);
-		if (!minish.cmds)
-			minish.exit_status = 0;
 		if (minish.cmds)
 			execute(&minish);
 		free_all(&minish);

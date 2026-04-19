@@ -47,9 +47,9 @@ static int	cd_too_many_arg(void)
 static char	*get_path(char **envp, char *argv)
 {
 	if (!argv)
-		return(get_env_value(envp, "HOME"));
+		return (get_env_value(envp, "HOME"));
 	else
-		return(get_env_value(envp, "OLDPWD"));
+		return (get_env_value(envp, "OLDPWD"));
 }
 
 int	builtin_cd(char **argv, char **envp)
@@ -63,7 +63,7 @@ int	builtin_cd(char **argv, char **envp)
 	if (!argv[1] || ft_strcmp(argv[1], "-"))
 	{
 		path = get_path(envp, argv[1]);
-		flag = 1;	
+		flag = 1;
 	}
 	else
 		path = argv[1];
