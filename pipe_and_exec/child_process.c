@@ -27,12 +27,12 @@ void	check_ret_value(int ret, char *path, t_cmd *cmd, char **envp)
 		if (errno == EACCES)
 		{
 			ft_putstr_fd("minishell: Permission denied\n", 2);
-			exit (126);
+			_exit (126);
 		}
 		else if (errno == ENOENT)
 		{
 			ft_putstr_fd("minishell: No such file or directory\n", 2);
-			exit (127);
+			_exit (127);
 		}
 		else if (errno == ENOEXEC)
 		{
@@ -55,7 +55,7 @@ void	check_access(t_cmd *cmd)
 		{
 			close(fd);
 			ft_putstr_fd("minishell: Is a directory\n", 2);
-			exit (126);
+			_exit (126);
 		}
 	}
 }
@@ -65,6 +65,7 @@ void	exec_external(t_cmd *cmd, char **envp)
 	char	*path;
 	int		ret;
 
+	path = NULL;
 	if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
 	{
 		check_access(cmd);
@@ -76,13 +77,13 @@ void	exec_external(t_cmd *cmd, char **envp)
 		if (!path)
 		{
 			ft_putstr_fd("minishell: command not found\n", 2);
-			exit(127);
+			_exit(127);
 		}
 		ret = execve(path, cmd->argv, envp);
 	}
 	check_ret_value(ret, path, cmd, envp);
 	free(path);
-	exit(1);
+	_exit(1);
 }
 
 /* ---- Child process ---- */
@@ -97,15 +98,15 @@ void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec)
 	if (cmd->redirs)
 	{
 		if (apply_redirs(cmd->redirs))
-			exit(1);
+			_exit(1);
 	}
 	close_all_pipes(exec->pipes, exec->nb_cmds - 1);
 	if (!cmd->argv || !cmd->argv[0] || cmd->argv[0][0] == '\0')
-		exit(0);
+		_exit(0);
 	if (is_builtin(cmd->argv[0]))
 	{
 		ret = exec_builtin(cmd, minish, 1);
-		exit(ret);
+		_exit(ret);
 	}
 	exec_external(cmd, minish->envp);
 }

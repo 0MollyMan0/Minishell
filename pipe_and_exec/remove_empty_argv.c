@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+void	prepare_single_pid(t_minish *minish)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGPIPE, SIG_DFL);
+	if (minish->cmds->redirs)
+	{
+		if (apply_redirs(minish->cmds->redirs))
+			_exit(1);
+	}
+	exec_external(minish->cmds, minish->envp);
+	_exit(1);
+}
+
 int	count_non_empty(char **argv)
 {
 	int	i;
@@ -21,7 +35,9 @@ int	count_non_empty(char **argv)
 	result = 0;
 	while (argv[i])
 	{
-		if (argv[i][0] != '\0')
+		if (argv[i][0] == '\0' && i == 0)
+			result--;
+		else if (argv[i][0] != '\0')
 			result++;
 		i++;
 	}
@@ -43,11 +59,10 @@ void	remove_empty_argv(t_cmd *cmd)
 	j = 0;
 	while (cmd->argv[i])
 	{
-		if (cmd->argv[i][0] != '\0')
-		{
-			new[j] = cmd->argv[i];
-			j++;
-		}
+		if (cmd->argv[0][0] == '\0' && i == 0)
+			i++;
+		new[j] = cmd->argv[i];
+		j++;
 		i++;
 	}
 	new[j] = NULL;

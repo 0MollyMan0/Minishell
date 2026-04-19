@@ -26,18 +26,7 @@ static void	exec_single(t_minish *minish)
 	}
 	pid = fork();
 	if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGPIPE, SIG_DFL);
-		if (minish->cmds->redirs)
-		{
-			if (apply_redirs(minish->cmds->redirs))
-				_exit(1);
-		}
-		exec_external(minish->cmds, minish->envp);
-		_exit(1);
-	}
+		prepare_single_pid(minish);
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
 	{
@@ -49,60 +38,31 @@ static void	exec_single(t_minish *minish)
 		minish->exit_status = WEXITSTATUS(status);
 }
 
-// static void	exec_single(t_minish *minish)
-// {
-// 	pid_t	pid;
-// 	int		status;
-
-// 	if (is_builtin(minish->cmds->argv[0]))
-// 	{
-// 		exec_single_builtin(minish);
-// 		return ;
-// 	}
-// 	pid = fork();
-// 	if (pid == 0)
-// 	{
-// 		if (minish->cmds->redirs)
-// 		{
-// 			if (apply_redirs(minish->cmds->redirs))
-// 				exit(1);
-// 		}
-// 		signal(SIGPIPE, SIG_DFL);
-// 		exec_external(minish->cmds, minish->envp);
-// 	}
-// 	waitpid(pid, &status, 0);
-// 	if (WIFEXITED(status))
-// 		minish->exit_status = WEXITSTATUS(status);
-// }
-/* we waitpid all the pids and we check the status and 
- * if we got a signal for pipes */
-
 static void	waitpid_all(t_minish *minish, int nb_cmds, pid_t *pids)
 {
-	int	i;
-	int	status;
-	int	signal;
-	int	written;
+	int		i;
+	int		status;
+	int		last_status;
+	pid_t	last_pid;
 
+	last_pid = pids[nb_cmds - 1];
 	i = 0;
-	written = 0;
+	last_status = 0;
 	while (i < nb_cmds)
 	{
 		waitpid(pids[i], &status, 0);
-		if (WIFSIGNALED(status))
-		{
-			signal = WTERMSIG(status);
-			if (signal == SIGPIPE && !written)
-			{
-				ft_putstr_fd("minishell: Broken pipe\n", 2);
-				written = 1;
-			}
-			minish->exit_status = 128 + signal;
-		}
-		else if (WIFEXITED(status))
-			minish->exit_status = WEXITSTATUS(status);
+		if (pids[i] == last_pid)
+			last_status = status;
 		i++;
 	}
+	if (WIFSIGNALED(last_status))
+	{
+		if (WTERMSIG(last_status) == SIGINT)
+			write(1, "\n", 1);
+		minish->exit_status = 128 + WTERMSIG(last_status);
+	}
+	else if (WIFEXITED(last_status))
+		minish->exit_status = WEXITSTATUS(last_status);
 }
 
 /* ---- Multi command execution (atleast 1 pipe)---- */

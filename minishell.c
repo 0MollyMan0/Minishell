@@ -39,7 +39,7 @@ int	main(int ac, char **av, char **envp)
 			break ;
 		add_history(minish.input);
 		minish.tokens = tokenize(minish.input);
-		minish.cmds = parser(&minish ,minish.tokens);
+		minish.cmds = parser(&minish, minish.tokens);
 		if (g_signal != 0)
 			minish.exit_status = g_signal;
 		minish.cmds = expansion(minish, minish.cmds);

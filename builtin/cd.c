@@ -53,7 +53,7 @@ int	builtin_cd(char **argv, char **envp)
 	if (!argv[1])
 		path = get_env_value(envp, "HOME");
 	else if (ft_strcmp(argv[1], "-"))
-		path = get_env_value(envp, "OLDPWD");		
+		path = get_env_value(envp, "OLDPWD");
 	else
 		path = argv[1];
 	change_oldpwd(envp);

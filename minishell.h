@@ -194,6 +194,9 @@ void	prepare_heredoc(t_minish *minish, t_cmd *cmds);
 void	remove_empty_argv(t_cmd *cmd);
 int		count_non_empty(char **argv);
 
+/* signal for single pid (exec single) */
+void	prepare_single_pid(t_minish *minish);
+
 void	exit_minish(void);
 
 /* global variable for SIGNAL */

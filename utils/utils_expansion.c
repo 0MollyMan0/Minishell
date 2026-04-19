@@ -31,7 +31,7 @@ int	is_char_var(char c)
 	return (0);
 }
 
-char	*get_var(char **envp ,char *str, int *i)
+char	*get_var(char **envp, char *str, int *i)
 {
 	char	*var_name;
 	char	*var;
