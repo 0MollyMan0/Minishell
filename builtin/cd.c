@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:21:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/18 18:02:45 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/19 11:39:37 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,27 @@ static int	cd_too_many_arg(void)
 	return (1);
 }
 
+static char	*get_path(char **envp, char *argv)
+{
+	if (!argv)
+		return(get_env_value(envp, "HOME"));
+	else
+		return(get_env_value(envp, "OLDPWD"));
+}
+
 int	builtin_cd(char **argv, char **envp)
 {
 	char	*path;
+	int		flag;
 
+	flag = 0;
 	if (argv[2])
 		return (cd_too_many_arg());
-	if (!argv[1])
-		path = get_env_value(envp, "HOME");
-	else if (ft_strcmp(argv[1], "-"))
-		path = get_env_value(envp, "OLDPWD");
+	if (!argv[1] || ft_strcmp(argv[1], "-"))
+	{
+		path = get_path(envp, argv[1]);
+		flag = 1;	
+	}
 	else
 		path = argv[1];
 	change_oldpwd(envp);
@@ -64,5 +75,7 @@ int	builtin_cd(char **argv, char **envp)
 		perror("cd");
 		return (1);
 	}
+	if (flag)
+		free(path);
 	return (0);
 }

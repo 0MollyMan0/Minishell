@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/18 18:01:21 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/19 11:33:52 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	*get_env_value(char **envp, char *str)
 	int		i;
 	int		start;
 	int		end;
-	char	*test;
 
 	i = 0;
 	while (envp[i])
@@ -27,8 +26,7 @@ char	*get_env_value(char **envp, char *str)
 		{
 			start = ft_strlen(str) + 1;
 			end = ft_strlen(envp[i]);
-			test = ft_strndup(envp[i], start, end);
-			return (test);
+			return (ft_strndup(envp[i], start, end));
 		}
 		i++;
 	}
