@@ -44,6 +44,8 @@ int	main(int ac, char **av, char **envp)
 			minish.exit_status = g_signal;
 		minish.cmds = expansion(minish, minish.cmds);
 		signal(SIGINT, SIG_IGN);
+		if (!minish.cmds)
+			minish.exit_status = 0;
 		if (minish.cmds)
 			execute(&minish);
 		setup_signals();

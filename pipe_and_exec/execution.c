@@ -125,6 +125,11 @@ void	execute(t_minish *minish)
 	}
 	prepare_heredoc(minish, minish->cmds);
 	exec.nb_cmds = count_cmds(minish->cmds);
+	if (exec.nb_cmds <= 0)
+	{
+		minish->exit_status = 0;
+		return ;
+	}
 	if (exec.nb_cmds == 1)
 	{
 		if (!minish->cmds->argv || !minish->cmds->argv[0]
