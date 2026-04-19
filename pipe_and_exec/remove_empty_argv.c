@@ -59,7 +59,10 @@ void	remove_empty_argv(t_cmd *cmd)
 	while (cmd->argv[i])
 	{
 		if (cmd->argv[0][0] == '\0' && i == 0)
+		{
+			free(cmd->argv[i]);
 			i++;
+		}
 		new[j] = cmd->argv[i];
 		j++;
 		i++;
