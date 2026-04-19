@@ -37,7 +37,7 @@ int	count_non_empty(char **argv)
 	{
 		if (argv[i][0] == '\0' && i == 0)
 			result--;
-		else if (argv[i][0] != '\0')
+		else
 			result++;
 		i++;
 	}
