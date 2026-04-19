@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/18 19:36:19 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/19 07:49:47 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,8 @@ void	add_redir(t_cmd *cmd, t_token_type type, char *filename);
 // --- Utils Expansion --- //
 int		is_expandable(char c);
 int		is_char_var(char c);
-char	*get_var(char *str, int *i);
+char	*get_var(char **envp, char *str, int *i);
 char	*remove_quotes(char *str);
-int		contains_valid_quotes(char *str);
 
 // --- Utils Exec --- //
 int		is_slash_in(char *str);
@@ -130,7 +129,7 @@ void	setup_signals(void);
 // --- Prepare Input --- //
 char	*read_input(void);
 t_token	*tokenize(const char *input);
-t_cmd	*parser(t_token *tokens);
+t_cmd	*parser(t_minish *minish, t_token *tokens);
 t_cmd	*expansion(t_minish minish, t_cmd *cmds);
 
 // // --- Exec --- //
