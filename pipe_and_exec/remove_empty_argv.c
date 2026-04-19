@@ -33,12 +33,11 @@ int	count_non_empty(char **argv)
 
 	i = 0;
 	result = 0;
+	if (argv[0][0] == '\0')
+		i++;
 	while (argv[i])
 	{
-		if (argv[i][0] == '\0' && i == 0)
-			result--;
-		else
-			result++;
+		result++;
 		i++;
 	}
 	return (result);
@@ -53,6 +52,7 @@ void	remove_empty_argv(t_cmd *cmd)
 	if (!cmd || !cmd->argv)
 		return ;
 	new = malloc(sizeof(char *) * (count_non_empty(cmd->argv) + 1));
+	printf("size = %i", count_non_empty(cmd->argv));
 	if (!new)
 		return ;
 	i = 0;
