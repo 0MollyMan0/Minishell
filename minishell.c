@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 12:10:39 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/19 12:35:20 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,22 @@ int	main(int ac, char **av, char **envp)
 	t_minish	minish;
 
 	minish = init_minish(ac, av, envp);
-	setup_signals();
 	while (1)
 	{
+		setup_signals();
 		minish.input = read_input();
 		if (!minish.input)
 			break ;
 		add_history(minish.input);
 		minish.tokens = tokenize(minish.input);
-		minish.cmds = parser(&minish, minish.tokens);
 		if (g_signal != 0)
 			minish.exit_status = g_signal;
-		minish.cmds = expansion(minish, minish.cmds);
+		minish.cmds = expansion(minish, parser(&minish, minish.tokens));
 		signal(SIGINT, SIG_IGN);
 		if (!minish.cmds)
 			minish.exit_status = 0;
 		if (minish.cmds)
 			execute(&minish);
-		setup_signals();
 		free_all(&minish);
 	}
 	free_tab(minish.envp);
