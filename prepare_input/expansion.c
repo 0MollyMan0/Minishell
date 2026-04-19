@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 07:51:02 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/19 11:05:43 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	var_case(char **envp, char *str, char **new_str, int *i)
 			return ;
 		i_var++;
 	}
+	free(var);
 }
 
 static void	do_expansion(char **str, char **new_str, int *i, t_minish minish)
