@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:43 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 07:58:49 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/19 08:11:19 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ static int	exit_too_many_arg(void)
 	return (1);
 }
 
-static int	exit_numeric_error(char *arg)
+static int	exit_numeric_error(t_minish *minish, char *arg)
 {
 	write(2, "exit: ", 6);
 	write(2, arg, ft_strlen(arg));
 	write(2, ": numeric argument required\n", 28);
-	exit(2);
+	free_all(minish);
+	free_tab(minish->envp);
+	exit(255);
 }
 
 static int	is_code_exit(char *str)
@@ -49,8 +51,8 @@ static int	is_code_exit(char *str)
 static int	exit_not_child(t_minish *minish, char **argv)
 {
 	long	arg;
-	char	*arg_cpy;
 
+	write(2, "exit\n", 5);
 	if (argv[1] && argv[2])
 		return (exit_too_many_arg());
 	if (!argv[1])
@@ -60,12 +62,7 @@ static int	exit_not_child(t_minish *minish, char **argv)
 		exit(minish->exit_status);
 	}
 	if (!is_code_exit(argv[1]) || !verif_long(argv[1]))
-	{
-		arg_cpy = argv[1];
-		free_all(minish);
-		free_tab(minish->envp);
-		exit_numeric_error(arg_cpy);
-	}
+		exit_numeric_error(minish, argv[1]);
 	arg = ft_atol(argv[1]);
 	free_all(minish);
 	free_tab(minish->envp);
@@ -83,7 +80,12 @@ int	builtin_exit(t_minish *minish, char **argv, int is_child)
 		if (!argv[1])
 			exit(minish->exit_status);
 		if (!is_code_exit(argv[1]) || !verif_long(argv[1]))
-			exit_numeric_error(argv[1]);
+		{
+			write(2, "exit: ", 6);
+			write(2, argv[1], ft_strlen(argv[1]));
+			write(2, ": numeric argument required\n", 28);
+			exit(2);
+		}
 		if (argv[2])
 			return (1);
 		arg = ft_atol(argv[1]);
