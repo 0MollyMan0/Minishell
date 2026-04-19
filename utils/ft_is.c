@@ -1,43 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_libft2.c                                     :+:      :+:    :+:   */
+/*   ft_is.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 10:02:02 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 07:58:37 by anfouger         ###   ########.fr       */
+/*   Created: 2026/04/19 07:59:20 by anfouger          #+#    #+#             */
+/*   Updated: 2026/04/19 07:59:37 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_isalpha(int x)
 {
-	size_t	i;
-
-	i = 0;
-	while ((s1[i] || s2[i]) && i < n)
-	{
-		if ((unsigned char)s1[i] == (unsigned char)s2[i])
-			i++;
-		else
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	}
-	return (0);
+	if ((x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z'))
+		return (1);
+	else
+		return (0);
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_isdigit(int x)
 {
-	size_t	i;
+	if (x >= '0' && x <= '9')
+		return (1);
+	else
+		return (0);
+}
 
-	i = 0;
-	while (s1[i])
-	{
-		if ((unsigned char)s1[i] == (unsigned char)s2[i])
-			i++;
-		else
-			return (0);
-	}
-	return (1);
+int	ft_isalnum(int x)
+{
+	if (ft_isdigit(x) || ft_isalpha(x))
+		return (8);
+	else
+		return (0);
 }
