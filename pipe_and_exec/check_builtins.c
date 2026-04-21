@@ -12,6 +12,12 @@
 
 #include "minishell.h"
 
+void	close_fd_saved(int saved_stdout, int saved_stdin)
+{
+	close(saved_stdout);
+	close(saved_stdin);
+}
+
 // Return 1 if it's a builtin //
 int	is_builtin(char *cmd)
 {
@@ -48,6 +54,8 @@ void	exec_single_builtin(t_minish *minish)
 			return ;
 		}
 	}
+	if (ft_strncmp(minish->cmds->argv[0], "exit", 5) == 0)
+		close_fd_saved(saved_stdout, saved_stdin);
 	minish->exit_status = exec_builtin(minish->cmds, minish, 0);
 	dup2(saved_stdout, STDOUT_FILENO);
 	dup2(saved_stdin, STDIN_FILENO);
