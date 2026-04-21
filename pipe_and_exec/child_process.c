@@ -20,26 +20,29 @@ void	setup_pipes_child(int i, int nb_cmds, int **pipes)
 		dup2(pipes[i][1], STDOUT_FILENO);
 }
 
-void	check_ret_value(int ret, char *path, t_cmd *cmd, char **envp)
+void	check_ret_value(int ret, char *path, t_minish *minish)
 {
 	if (ret == -1)
 	{
 		if (errno == EACCES)
 		{
 			ft_putstr_fd("minishell: Permission denied\n", 2);
+			call_free_all(path, minish);
 			_exit (126);
 		}
 		else if (errno == ENOENT)
 		{
 			ft_putstr_fd("minishell: No such file or directory\n", 2);
+			call_free_all(path, minish);
 			_exit (127);
 		}
 		else if (errno == ENOEXEC)
 		{
-			if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
-				execve("/bin/sh", cmd->argv, envp);
+			if (minish->cmds->argv[0][0] == '.'
+				|| minish->cmds->argv[0][0] == '/')
+				execve("/bin/sh", minish->cmds->argv, minish->envp);
 			else
-				execve("/bin/sh", (char *[]){"sh", path, NULL}, envp);
+				execve("/bin/sh", (char *[]){"sh", path, NULL}, minish->envp);
 		}
 	}
 }
@@ -60,29 +63,31 @@ void	check_access(t_cmd *cmd)
 	}
 }
 
-void	exec_external(t_cmd *cmd, char **envp)
+void	exec_external(t_minish *minish)
 {
 	char	*path;
 	int		ret;
 
 	path = NULL;
-	if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
+	if (minish->cmds->argv[0][0] == '.' || minish->cmds->argv[0][0] == '/')
 	{
-		check_access(cmd);
-		ret = execve(cmd->argv[0], cmd->argv, envp);
+		check_access(minish->cmds);
+		ret = execve(minish->cmds->argv[0], minish->cmds->argv, minish->envp);
 	}
 	else
 	{
-		path = resolve_cmd(cmd->argv[0], envp);
+		path = resolve_cmd(minish->cmds->argv[0], minish->envp);
 		if (!path)
 		{
 			ft_putstr_fd("minishell: command not found\n", 2);
+			free_all(minish);
+			free_tab(minish->envp);
 			_exit(127);
 		}
-		ret = execve(path, cmd->argv, envp);
+		ret = execve(path, minish->cmds->argv, minish->envp);
 	}
-	check_ret_value(ret, path, cmd, envp);
-	free(path);
+	check_ret_value(ret, path, minish);
+	call_free_all(path, minish);
 	_exit(1);
 }
 
@@ -98,15 +103,17 @@ void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec)
 	if (cmd->redirs)
 	{
 		if (apply_redirs(cmd->redirs))
-			_exit(1);
+			free_minish_exit_one(minish);
 	}
 	close_all_pipes(exec->pipes, exec->nb_cmds - 1);
 	if (!cmd->argv || !cmd->argv[0] || cmd->argv[0][0] == '\0')
-		_exit(0);
+		free_minish_exit_zero(minish);
 	if (is_builtin(cmd->argv[0]))
 	{
 		ret = exec_builtin(cmd, minish, 1);
+		free_all(minish);
+		free_tab(minish->envp);
 		_exit(ret);
 	}
-	exec_external(cmd, minish->envp);
+	exec_external(minish);
 }

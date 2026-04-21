@@ -20,9 +20,15 @@ void	prepare_single_pid(t_minish *minish)
 	if (minish->cmds->redirs)
 	{
 		if (apply_redirs(minish->cmds->redirs))
+		{
+			free_all(minish);
+			free_tab(minish->envp);
 			_exit(1);
+		}
 	}
-	exec_external(minish->cmds, minish->envp);
+	exec_external(minish);
+	free_all(minish);
+	free_tab(minish->envp);
 	_exit(1);
 }
 

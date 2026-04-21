@@ -180,7 +180,7 @@ int		apply_redir_in(t_redir *redir);
 
 /* child process functions */
 void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec);
-void	exec_external(t_cmd *cmd, char **envp);
+void	exec_external(t_minish *minish);
 void	setup_pipes_child(int i, int nb_cmds, int **pipes);
 
 // --- Free --- //
@@ -198,6 +198,11 @@ int		count_non_empty(char **argv);
 
 /* signal for single pid (exec single) */
 void	prepare_single_pid(t_minish *minish);
+
+/* call free function for pid process */
+void	call_free_all(char *path, t_minish *minish);
+void	free_minish_exit_zero(t_minish *minish);
+void	free_minish_exit_one(t_minish *minish);
 
 void	exit_minish(void);
 
