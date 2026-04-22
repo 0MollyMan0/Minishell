@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 11:41:52 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/22 10:41:14 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_cmd	*expansion(t_minish minish, t_cmd *cmds)
 	while (p_cmds)
 	{
 		i = 0;
-		while (p_cmds->argv[i])
+		while (p_cmds->argv && p_cmds->argv[i])
 		{
 			p_cmds->argv[i] = create_new_arg(p_cmds->argv[i], minish);
 			p_cmds->argv[i] = remove_quotes(p_cmds->argv[i]);

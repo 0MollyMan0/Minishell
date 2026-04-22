@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 08:41:11 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/18 20:18:50 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/22 10:34:32 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	verif_syntax(t_token *tokens)
 	i = 0;
 	while (tokens)
 	{
-		if (i == 0 && tokens->type != TOKEN_WORD)
+		if (i == 0 && tokens->type == TOKEN_PIPE)
 			return (0);
 		if (tokens->type == TOKEN_PIPE)
 		{

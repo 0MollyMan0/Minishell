@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_and_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jemonthi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 02:10:23 by jemonthi          #+#    #+#             */
-/*   Updated: 2026/03/22 12:44:16 by jemonthi         ###   ########.fr       */
+/*   Updated: 2026/04/22 10:09:08 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	free_minish_exit_zero(t_minish *minish)
 {
-	free (minish);
 	free_tab(minish->envp);
+	free_all(minish);
 	_exit(0);
 }
 
 void	free_minish_exit_one(t_minish *minish)
 {
-	free (minish);
 	free_tab(minish->envp);
+	free_all(minish);
 	_exit(1);
 }
 

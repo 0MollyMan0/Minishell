@@ -49,19 +49,33 @@ void	check_ret_value(int ret, char *path, t_minish *minish)
 
 void	check_access(t_cmd *cmd)
 {
-	int	fd;
+	struct stat	st;
 
-	if (access(cmd->argv[0], F_OK) == 0)
+	if (stat(cmd->argv[0], &st) == 0)
 	{
-		fd = open(cmd->argv[0], O_DIRECTORY);
-		if (fd != -1)
+		if (S_ISDIR(st.st_mode))
 		{
-			close(fd);
 			ft_putstr_fd("minishell: Is a directory\n", 2);
-			_exit (126);
+			exit(126);
 		}
 	}
 }
+
+// void	check_access(t_cmd *cmd)
+// {
+// 	int	fd;
+
+// 	if (access(cmd->argv[0], F_OK) == 0)
+// 	{
+// 		fd = open(cmd->argv[0], O_DIRECTORY);
+// 		if (fd != -1)
+// 		{
+// 			close(fd);
+// 			ft_putstr_fd("minishell: Is a directory\n", 2);
+// 			_exit (126);
+// 		}
+// 	}
+// }
 
 void	exec_external(t_minish *minish)
 {

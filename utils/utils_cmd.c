@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 08:41:23 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/18 09:55:36 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/22 10:33:05 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	add_redir(t_cmd *cmd, t_token_type type, char *filename)
 	if (!redir)
 		return ;
 	redir->type = type;
-	redir->filename = strdup(filename);
+	redir->filename = ft_strdup(filename);
 	redir->next = NULL;
 	if (!cmd->redirs)
 	{
