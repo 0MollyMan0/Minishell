@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 09:39:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/03/17 09:39:56 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 09:20:52 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	tab_len(char **tab)
 	return (i);
 }
 
-char	**dup_tab(char **tab)
+char	**dup_str_tab(char **tab)
 {
 	char	**new_tab;
 	int		i;
@@ -45,7 +45,7 @@ char	**dup_tab(char **tab)
 	return (new_tab);
 }
 
-void	clean_tab(char **tab, int i)
+void	clean_str_tab(char **tab, int i)
 {
 	while (i > 0)
 		free(tab[--i]);

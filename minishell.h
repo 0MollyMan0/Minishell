@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 11:53:16 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 09:22:54 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ typedef enum e_token_type
 	TOKEN_APPEND
 }	t_token_type;
 
+typedef struct s_env
+{
+	char	**envp;
+	int		*has_value;
+	int		*exported;
+}	t_env;
+
 typedef struct s_token
 {
 	t_token_type	type;
@@ -64,7 +71,7 @@ typedef struct s_minish
 {
 	int		exit_status;
 	char	*input;
-	char	**envp;
+	t_env	*env;
 	t_token	*tokens;
 	t_cmd	*cmds;
 }	t_minish;
@@ -74,6 +81,10 @@ typedef struct s_exec
 	int		nb_cmds;
 	int		**pipes;
 }	t_exec;
+
+
+// --- Utils envp --- //
+t_env	*init_envp(char **tab);
 
 // --- Utils Libft --- //
 size_t	ft_strlen(const char *s);
@@ -96,9 +107,9 @@ void	*ft_memset(void *s, int c, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 
 // --- Utils Tab --- //
-void	free_tab(char **s);
-char	**dup_tab(char **tab);
-void	clean_tab(char **tab, int i);
+void	free_str_tab(char **s);
+char	**dup_str_tab(char **tab);
+void	clean_str_tab(char **tab, int i);
 
 // --- Utils Token --- //
 void	add_token(t_token **lst, t_token *new);
@@ -137,10 +148,9 @@ t_token	*tokenize(const char *input);
 t_cmd	*parser(t_minish *minish, t_token *tokens);
 t_cmd	*expansion(t_minish minish, t_cmd *cmds);
 
-// // --- Exec --- //
-// void	exec(t_minish *minish);
+// // --- Exec --- // //
 
-// --- Buitin --- //
+// --- Builtin --- //
 int		builtin_cd(char **argv, char **envp);
 int		builtin_echo(char **argv);
 int		builtin_env(char **envp, char **argv);
@@ -184,7 +194,7 @@ void	exec_external(t_minish *minish);
 void	setup_pipes_child(int i, int nb_cmds, int **pipes);
 
 // --- Free --- //
-void	free_all(t_minish *minish);
+void	free_all(t_minish *minish, int end);
 void	free_cmds(t_cmd *cmds);
 void	ft_free_split(char **split);
 

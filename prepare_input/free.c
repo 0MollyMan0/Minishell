@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:11:42 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 12:09:30 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 09:23:44 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_tokens(t_token *tokens)
 	}
 }
 
-void	free_tab(char **tab)
+void	free_str_tab(char **tab)
 {
 	int	i;
 
@@ -50,7 +50,7 @@ void	free_cmds(t_cmd *cmds)
 	{
 		next_cmd = cmds->next;
 		cmds->next = NULL;
-		free_tab(cmds->argv);
+		free_str_tab(cmds->argv);
 		while (cmds->redirs)
 		{
 			next_redir = cmds->redirs->next;
@@ -64,7 +64,7 @@ void	free_cmds(t_cmd *cmds)
 	}
 }
 
-void	free_all(t_minish *minish)
+void	free_all(t_minish *minish, int end)
 {
 	if (minish->input)
 		free(minish->input);
@@ -72,4 +72,11 @@ void	free_all(t_minish *minish)
 		free_tokens(minish->tokens);
 	if (minish->cmds)
 		free_cmds(minish->cmds);
+	if (end)
+	{
+		free(minish->env->exported);
+		free(minish->env->has_value);
+		free_str_tab(minish->env->envp);
+		free(minish->env);
+	}
 }
