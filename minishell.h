@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 10:20:58 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 11:58:27 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_exec
 
 // --- Utils envp --- //
 t_env	*init_envp(char **tab);
+int		is_value_empty(char *str);
 
 // --- Utils Libft --- //
 size_t	ft_strlen(const char *s);
@@ -110,6 +111,7 @@ void	*ft_calloc(size_t nmemb, size_t size);
 void	free_str_tab(char **s);
 char	**dup_str_tab(char **tab);
 void	clean_str_tab(char **tab, int i);
+int		*add_value_tab_int(int *tab, int value, int len_tab);
 
 // --- Utils Token --- //
 void	add_token(t_token **lst, t_token *new);

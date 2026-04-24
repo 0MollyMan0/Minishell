@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:14 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 10:22:36 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 12:07:48 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	verif_export(char *str)
 		while (str[i] == '_' || isalnum(str[i]))
 		{
 			if (str[i + 1] == '\0'
-				|| (str[i + 1] == '=' && str[i + 2]))
+				|| (str[i + 1] == '='))
 				return (1);
 			i++;
 		}
@@ -52,7 +52,7 @@ static int	export_no_args(t_minish *minish)
 	i = 0;
 	while (minish->env->envp[i])
 	{
-		if (minish->env->has_value[i] && !minish->env->exported[i])
+		if (!minish->env->has_value[i] && minish->env->exported[i])
 			printf("declare -x %s\n", minish->env->envp[i]);
 		else
 			print_export(minish->env->envp[i]);

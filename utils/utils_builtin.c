@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 10:28:06 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 12:03:29 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ static int	copy_str_tab(char **tab, char **new_tab)
 
 char	**add_var(t_env *env, char **tab, char *str)
 {
-	(void)env;
 	char	**new_tab;
+	int		new_len;
 	int		i;
 
-	new_tab = malloc(sizeof(char *) * (tab_str_len(tab) + 2));
+	new_len = tab_str_len(tab) + 2;
+	new_tab = malloc(sizeof(char *) * new_len);
 	if (!new_tab)
 		return (NULL);
 	i = copy_str_tab(tab, new_tab);
@@ -70,6 +71,11 @@ char	**add_var(t_env *env, char **tab, char *str)
 		return (NULL);
 	}
 	new_tab[i + 1] = NULL;
+	env->exported = add_value_tab_int(env->exported, 1, new_len - 2);
+	if (is_value_empty(new_tab[i]))
+		env->has_value = add_value_tab_int(env->has_value, 0, new_len - 2);
+	else
+		env->has_value = add_value_tab_int(env->has_value, 1, new_len - 2);
 	free_str_tab(tab);
 	return (new_tab);
 }
@@ -100,12 +106,13 @@ void	print_export(char *str)
 
 	i = 0;
 	printf("declare -x ");
-	while (str[i] && str[i - 1] != '=')
+	while (str[i] && str[i] != '=')
 	{
 		printf("%c", str[i]);
 		i++;
 	}
-	printf("\"");
+	printf("=\"");
+	i++;
 	while (str[i])
 	{
 		printf("%c", str[i]);

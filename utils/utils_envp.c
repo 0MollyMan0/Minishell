@@ -6,11 +6,25 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 09:02:06 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 10:27:17 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 11:58:12 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	is_value_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 static void	fill_int_tab(int *tab, int tab_len, int value)
 {

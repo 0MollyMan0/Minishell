@@ -6,11 +6,30 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 09:39:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 10:25:28 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 11:45:26 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	*add_value_tab_int(int *tab, int value, int len_tab)
+{
+	int	*new;
+	int	i;
+
+	new = malloc(sizeof(int) * (len_tab + 1));
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (i < len_tab)
+	{
+		new[i] = tab[i];
+		i++;
+	}
+	new[i] = value;
+	free(tab);
+	return (new);
+}
 
 int	tab_str_len(char **tab)
 {
