@@ -40,9 +40,9 @@ void	check_ret_value(int ret, char *path, t_minish *minish)
 		{
 			if (minish->cmds->argv[0][0] == '.'
 				|| minish->cmds->argv[0][0] == '/')
-				execve("/bin/sh", minish->cmds->argv, minish->envp);
+				execve("/bin/sh", minish->cmds->argv, minish->env->envp);
 			else
-				execve("/bin/sh", (char *[]){"sh", path, NULL}, minish->envp);
+				execve("/bin/sh", (char *[]){"sh", path, NULL}, minish->env->envp);
 		}
 	}
 }
@@ -86,19 +86,18 @@ void	exec_external(t_minish *minish)
 	if (minish->cmds->argv[0][0] == '.' || minish->cmds->argv[0][0] == '/')
 	{
 		check_access(minish->cmds);
-		ret = execve(minish->cmds->argv[0], minish->cmds->argv, minish->envp);
+		ret = execve(minish->cmds->argv[0], minish->cmds->argv, minish->env->envp);
 	}
 	else
 	{
-		path = resolve_cmd(minish->cmds->argv[0], minish->envp);
+		path = resolve_cmd(minish->cmds->argv[0], minish->env->envp);
 		if (!path)
 		{
 			ft_putstr_fd("minishell: command not found\n", 2);
-			free_all(minish);
-			free_tab(minish->envp);
+			free_all(minish, 1);
 			_exit(127);
 		}
-		ret = execve(path, minish->cmds->argv, minish->envp);
+		ret = execve(path, minish->cmds->argv, minish->env->envp);
 	}
 	check_ret_value(ret, path, minish);
 	call_free_all(path, minish);
@@ -125,8 +124,7 @@ void	child_process(t_minish *minish, t_cmd *cmd, int i, t_exec *exec)
 	if (is_builtin(cmd->argv[0]))
 	{
 		ret = exec_builtin(cmd, minish, 1);
-		free_all(minish);
-		free_tab(minish->envp);
+		free_all(minish, 1);
 		_exit(ret);
 	}
 	exec_external(minish);

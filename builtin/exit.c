@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:43 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 08:11:19 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 09:50:51 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static int	exit_numeric_error(t_minish *minish, char *arg)
 	write(2, "exit: ", 6);
 	write(2, arg, ft_strlen(arg));
 	write(2, ": numeric argument required\n", 28);
-	free_all(minish);
-	free_tab(minish->envp);
+	free_all(minish, 1);
 	exit(255);
 }
 
@@ -57,15 +56,13 @@ static int	exit_not_child(t_minish *minish, char **argv)
 		return (exit_too_many_arg());
 	if (!argv[1])
 	{
-		free_all(minish);
-		free_tab(minish->envp);
+		free_all(minish, 1);
 		exit(minish->exit_status);
 	}
 	if (!is_code_exit(argv[1]) || !verif_long(argv[1]))
 		exit_numeric_error(minish, argv[1]);
 	arg = ft_atol(argv[1]);
-	free_all(minish);
-	free_tab(minish->envp);
+	free_all(minish, 1);
 	exit((unsigned char)arg);
 }
 

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 12:40:40 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/22 10:41:14 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 09:49:52 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	do_expansion(char **str, char **new_str, int *i, t_minish minish)
 		*i += 1;
 	}
 	else
-		var_case(minish.envp, *str, new_str, i);
+		var_case(minish.env->envp, *str, new_str, i);
 	if (!*str || !*new_str)
 	{
 		*new_str = NULL;

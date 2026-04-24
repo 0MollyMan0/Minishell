@@ -67,7 +67,7 @@ void	exec_single_builtin(t_minish *minish)
 int	exec_builtin(t_cmd *cmd, t_minish *minish, int is_child)
 {
 	if (ft_strncmp(cmd->argv[0], "cd", 3) == 0)
-		return (builtin_cd(cmd->argv, minish->envp));
+		return (builtin_cd(cmd->argv, minish->env->envp));
 	if (ft_strncmp(cmd->argv[0], "echo", 5) == 0)
 		return (builtin_echo(cmd->argv));
 	if (ft_strncmp(cmd->argv[0], "export", 7) == 0)
@@ -77,7 +77,7 @@ int	exec_builtin(t_cmd *cmd, t_minish *minish, int is_child)
 	if (ft_strncmp(cmd->argv[0], "unset", 6) == 0)
 		return (builtin_unset(minish, cmd->argv));
 	if (ft_strncmp(cmd->argv[0], "env", 4) == 0)
-		return (builtin_env(minish->envp, cmd->argv));
+		return (builtin_env(minish->env, cmd->argv));
 	if (ft_strncmp(cmd->argv[0], "exit", 5) == 0)
 		return (builtin_exit(minish, cmd->argv, is_child));
 	return (0);
