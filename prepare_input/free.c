@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:11:42 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 09:33:49 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 10:49:58 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ void	free_all(t_minish *minish, int end)
 		free_cmds(minish->cmds);
 	if (end && minish->env)
 	{
-		free(minish->env);
 		if (minish->env->exported)
 			free(minish->env->exported);
 		if (minish->env->has_value)
 			free(minish->env->has_value);
 		if (minish->env->envp)
 			free_str_tab(minish->env->envp);
+		free(minish->env);
 	}
 }

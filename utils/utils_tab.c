@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 09:39:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 09:40:43 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 10:25:28 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**dup_str_tab(char **tab)
 	char	**new_tab;
 	int		i;
 
-	new_tab = malloc(sizeof(char *) * (tab_len(tab) + 1));
+	new_tab = malloc(sizeof(char *) * (tab_str_len(tab) + 1));
 	if (!new_tab)
 		return (NULL);
 	i = 0;
@@ -36,7 +36,7 @@ char	**dup_str_tab(char **tab)
 		new_tab[i] = ft_strdup(tab[i]);
 		if (!new_tab[i])
 		{
-			clean_tab(tab, i);
+			clean_str_tab(tab, i);
 			return (NULL);
 		}
 		i++;

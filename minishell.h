@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 09:52:31 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 10:20:58 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,10 @@ void	end_of_exec_single(t_minish *minish, int status);
 
 // --- Utils Builtin --- //
 char	*get_env_value(char **envp, char *str);
-char	**add_var(char **tab, char *str);
+char	**add_var(t_env *env, char **tab, char *str);
 int		change_value(char **envp, char *key, char *str);
 char	*get_key(char *str);
+void	print_export(char *str);
 
 // --- Signals --- //
 void	handle_sigint(int sig);

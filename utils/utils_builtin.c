@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 11:49:50 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 10:28:06 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_env_value(char **envp, char *str)
 	return (NULL);
 }
 
-static int	copy_tab(char **tab, char **new_tab)
+static int	copy_str_tab(char **tab, char **new_tab)
 {
 	int		i;
 
@@ -43,7 +43,7 @@ static int	copy_tab(char **tab, char **new_tab)
 		new_tab[i] = ft_strdup(tab[i]);
 		if (!new_tab[i])
 		{
-			clean_tab(new_tab, i);
+			clean_str_tab(new_tab, i);
 			return (-1);
 		}
 		i++;
@@ -51,25 +51,26 @@ static int	copy_tab(char **tab, char **new_tab)
 	return (i);
 }
 
-char	**add_var(char **tab, char *str)
+char	**add_var(t_env *env, char **tab, char *str)
 {
+	(void)env;
 	char	**new_tab;
 	int		i;
 
-	new_tab = malloc(sizeof(char *) * (tab_len(tab) + 2));
+	new_tab = malloc(sizeof(char *) * (tab_str_len(tab) + 2));
 	if (!new_tab)
 		return (NULL);
-	i = copy_tab(tab, new_tab);
+	i = copy_str_tab(tab, new_tab);
 	if (i == -1)
 		return (NULL);
 	new_tab[i] = ft_strdup(str);
 	if (!new_tab[i])
 	{
-		clean_tab(new_tab, i);
+		clean_str_tab(new_tab, i);
 		return (NULL);
 	}
 	new_tab[i + 1] = NULL;
-	free_tab(tab);
+	free_str_tab(tab);
 	return (new_tab);
 }
 
@@ -91,4 +92,24 @@ int	change_value(char **envp, char *key, char *str)
 		i++;
 	}
 	return (0);
+}
+
+void	print_export(char *str)
+{
+	int i;
+
+	i = 0;
+	printf("declare -x ");
+	while (str[i] && str[i - 1] != '=')
+	{
+		printf("%c", str[i]);
+		i++;
+	}
+	printf("\"");
+	while (str[i])
+	{
+		printf("%c", str[i]);
+		i++;
+	}
+	printf("\"\n");
 }
