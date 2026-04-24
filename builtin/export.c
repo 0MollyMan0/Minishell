@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:22:14 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 12:07:48 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 12:15:51 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	builtin_export(t_minish *minish, char **argv)
 		key = get_key(argv[i]);
 		if (!key)
 			return (1);
-		if (!change_value(minish->env->envp, key, argv[i]))
+		if (!change_value(minish->env, key, argv[i]))
 			minish->env->envp = add_var(minish->env, 
 				minish->env->envp, argv[i]);
 		free(key);

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 12:03:29 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 12:15:18 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,23 @@ char	**add_var(t_env *env, char **tab, char *str)
 	return (new_tab);
 }
 
-int	change_value(char **envp, char *key, char *str)
+int	change_value(t_env *env, char *key, char *str)
 {
 	int		i;
 
 	i = 0;
-	while (envp[i])
+	while (env->envp[i])
 	{
-		if (ft_strncmp(envp[i], key, ft_strlen(key)) == 0
-			&& (envp[i][ft_strlen(key)] == '='
-			|| envp[i][ft_strlen(key)] == '\0'))
+		if (ft_strncmp(env->envp[i], key, ft_strlen(key)) == 0
+			&& (env->envp[i][ft_strlen(key)] == '='
+			|| env->envp[i][ft_strlen(key)] == '\0'))
 		{
-			free(envp[i]);
-			envp[i] = ft_strdup(str);
+			free(env->envp[i]);
+			env->envp[i] = ft_strdup(str);
+			if (is_value_empty(str))
+				env->has_value[i] = 0;
+			else
+				env->has_value[i] = 1;
 			return (1);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:21:54 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/19 11:39:37 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 14:21:15 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static char	*get_pwd(void)
 		return (NULL);
 }
 
-static void	change_oldpwd(char **envp)
+static void	change_oldpwd(t_env *env)
 {
 	char	*old_pwd;
 	char	*var;
 
 	old_pwd = get_pwd();
 	var = ft_strjoin("OLDPWD=", old_pwd);
-	change_value(envp, "OLDPWD", var);
+	change_value(env, "OLDPWD", var);
 	free(old_pwd);
 	free(var);
 }
@@ -52,7 +52,7 @@ static char	*get_path(char **envp, char *argv)
 		return (get_env_value(envp, "OLDPWD"));
 }
 
-int	builtin_cd(char **argv, char **envp)
+int	builtin_cd(char **argv, t_env *env)
 {
 	char	*path;
 	int		flag;
@@ -62,12 +62,12 @@ int	builtin_cd(char **argv, char **envp)
 		return (cd_too_many_arg());
 	if (!argv[1] || ft_strcmp(argv[1], "-"))
 	{
-		path = get_path(envp, argv[1]);
+		path = get_path(env->envp, argv[1]);
 		flag = 1;
 	}
 	else
 		path = argv[1];
-	change_oldpwd(envp);
+	change_oldpwd(env);
 	if (!path)
 		return (1);
 	if (chdir(path) == -1)

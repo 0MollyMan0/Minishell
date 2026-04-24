@@ -67,7 +67,7 @@ void	exec_single_builtin(t_minish *minish)
 int	exec_builtin(t_cmd *cmd, t_minish *minish, int is_child)
 {
 	if (ft_strncmp(cmd->argv[0], "cd", 3) == 0)
-		return (builtin_cd(cmd->argv, minish->env->envp));
+		return (builtin_cd(cmd->argv, minish->env));
 	if (ft_strncmp(cmd->argv[0], "echo", 5) == 0)
 		return (builtin_echo(cmd->argv));
 	if (ft_strncmp(cmd->argv[0], "export", 7) == 0)
