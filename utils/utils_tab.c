@@ -6,13 +6,13 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 09:39:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 09:20:52 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/24 09:40:43 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	tab_len(char **tab)
+int	tab_str_len(char **tab)
 {
 	int	i;
 
