@@ -42,7 +42,8 @@ void	check_ret_value(int ret, char *path, t_minish *minish)
 				|| minish->cmds->argv[0][0] == '/')
 				execve("/bin/sh", minish->cmds->argv, minish->env->envp);
 			else
-				execve("/bin/sh", (char *[]){"sh", path, NULL}, minish->env->envp);
+				execve("/bin/sh", (char *[]){"sh", path, NULL},
+					minish->env->envp);
 		}
 	}
 }
@@ -61,22 +62,6 @@ void	check_access(t_cmd *cmd)
 	}
 }
 
-// void	check_access(t_cmd *cmd)
-// {
-// 	int	fd;
-
-// 	if (access(cmd->argv[0], F_OK) == 0)
-// 	{
-// 		fd = open(cmd->argv[0], O_DIRECTORY);
-// 		if (fd != -1)
-// 		{
-// 			close(fd);
-// 			ft_putstr_fd("minishell: Is a directory\n", 2);
-// 			_exit (126);
-// 		}
-// 	}
-// }
-
 void	exec_external(t_minish *minish)
 {
 	char	*path;
@@ -86,7 +71,8 @@ void	exec_external(t_minish *minish)
 	if (minish->cmds->argv[0][0] == '.' || minish->cmds->argv[0][0] == '/')
 	{
 		check_access(minish->cmds);
-		ret = execve(minish->cmds->argv[0], minish->cmds->argv, minish->env->envp);
+		ret = execve(minish->cmds->argv[0],
+				minish->cmds->argv, minish->env->envp);
 	}
 	else
 	{

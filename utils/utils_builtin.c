@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 09:35:18 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 12:15:18 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/26 09:42:40 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	change_value(t_env *env, char *key, char *str)
 
 void	print_export(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	printf("declare -x ");

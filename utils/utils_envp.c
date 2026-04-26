@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 09:02:06 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 11:58:12 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/26 09:42:48 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_value_empty(char *str)
 
 static void	fill_int_tab(int *tab, int tab_len, int value)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < tab_len)

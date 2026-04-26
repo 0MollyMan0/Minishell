@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:11:42 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 14:17:50 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/26 09:42:19 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ void	free_all(t_minish *minish, int end)
 	if (minish->tokens)
 	{
 		free_tokens(minish->tokens);
-		minish->tokens = NULL;	
+		minish->tokens = NULL;
 	}
 	if (minish->cmds)
 	{
 		free_cmds(minish->cmds);
-		minish->cmds = NULL;	
+		minish->cmds = NULL;
 	}
 	if (end && minish->env)
 	{

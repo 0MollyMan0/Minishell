@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 14:19:40 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/26 09:40:36 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ typedef struct s_exec
 	int		nb_cmds;
 	int		**pipes;
 }	t_exec;
-
 
 // --- Utils envp --- //
 t_env	*init_envp(char **tab);

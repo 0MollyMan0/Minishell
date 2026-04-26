@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:17:32 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/24 09:23:11 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/26 09:43:21 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		if (!minish.env)
-			break;
+			break ;
 		setup_signals();
 		minish.input = read_input();
 		if (!minish.input)
