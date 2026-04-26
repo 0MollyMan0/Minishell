@@ -3,6 +3,7 @@
 *.o
 .env*
 .vscode/
+.minishell_tester/
 test.txt
 *.supp
 minishell
