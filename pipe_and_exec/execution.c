@@ -14,7 +14,7 @@
 
 /* ---- Single command execution (no pipe)---- */
 
-static void	exec_single(t_minish *minish)
+static void	exec_single(t_minish *minish, t_exec *exec)
 {
 	pid_t	pid;
 	int		status;
@@ -26,7 +26,7 @@ static void	exec_single(t_minish *minish)
 	}
 	pid = fork();
 	if (pid == 0)
-		prepare_single_pid(minish);
+		prepare_single_pid(minish, exec);
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
 	{
@@ -96,7 +96,11 @@ static void	exec_multi(t_minish *minish, t_exec *exec)
 
 	pids = malloc(sizeof(pid_t) * exec->nb_cmds);
 	if (!pids)
+	{
+		close_all_pipes(exec->pipes, exec->nb_cmds - 1);
+		free_pipes(exec->pipes, exec->nb_cmds - 1);
 		return ;
+	}
 	if (fork_all(minish, exec, pids) < 0)
 	{
 		close_all_pipes(exec->pipes, exec->nb_cmds - 1);
@@ -131,7 +135,7 @@ void	execute(t_minish *minish)
 			|| (minish->cmds->argv[0][0] == '\0'
 			&& minish->cmds->argv[1] == NULL))
 			return ;
-		exec_single(minish);
+		exec_single(minish, &exec);
 		return ;
 	}
 	exec.pipes = create_pipes(exec.nb_cmds - 1);

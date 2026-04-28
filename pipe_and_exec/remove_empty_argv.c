@@ -12,8 +12,11 @@
 
 #include "minishell.h"
 
-void	prepare_single_pid(t_minish *minish)
+void	prepare_single_pid(t_minish *minish, t_exec *exec)
 {
+	t_cmd	*cmd;
+
+	cmd = minish->cmds;
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGPIPE, SIG_DFL);
@@ -25,7 +28,7 @@ void	prepare_single_pid(t_minish *minish)
 			_exit(1);
 		}
 	}
-	exec_external(minish);
+	exec_external(minish, cmd, exec);
 	free_all(minish, 1);
 	_exit(1);
 }

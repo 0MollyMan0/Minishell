@@ -77,13 +77,13 @@ int	builtin_unset(t_minish *minish, char **argv)
 		if (i == -1)
 		{
 			j++;
-			continue;
+			continue ;
 		}
 		minish->env->envp = dup_tab_str_less_i(minish->env->envp, i);
 		minish->env->has_value = dup_tab_int_less_i(minish->env->has_value, i,
-			tab_str_len(minish->env->envp) + 1);
+				tab_str_len(minish->env->envp) + 1);
 		minish->env->exported = dup_tab_int_less_i(minish->env->exported, i,
-			tab_str_len(minish->env->envp) + 1);
+				tab_str_len(minish->env->envp) + 1);
 		j++;
 	}
 	return (0);
