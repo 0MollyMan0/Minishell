@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/26 09:40:36 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/28 08:47:57 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	free_str_tab(char **s);
 char	**dup_str_tab(char **tab);
 void	clean_str_tab(char **tab, int i);
 int		*add_value_tab_int(int *tab, int value, int len_tab);
+int		*dup_tab_int_less_i(int *tab, int index, int length);
 
 // --- Utils Token --- //
 void	add_token(t_token **lst, t_token *new);
