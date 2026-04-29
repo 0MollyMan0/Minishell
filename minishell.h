@@ -6,7 +6,7 @@
 /*   By: anfouger <anfouger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:35:28 by anfouger          #+#    #+#             */
-/*   Updated: 2026/04/28 08:47:57 by anfouger         ###   ########.fr       */
+/*   Updated: 2026/04/29 10:02:08 by anfouger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_exec
 // --- Utils envp --- //
 t_env	*init_envp(char **tab);
 int		is_value_empty(char *str);
+t_env	sort_env(t_env old_env);
 
 // --- Utils Libft --- //
 size_t	ft_strlen(const char *s);
@@ -105,6 +106,7 @@ int		ft_isalpha(int x);
 int		ft_isdigit(int x);
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
+int		is_used(int *used, int x, int len);
 
 // --- Utils Tab --- //
 void	free_str_tab(char **s);
@@ -140,6 +142,7 @@ char	**add_var(t_env *env, char **tab, char *str);
 int		change_value(t_env *env, char *key, char *str);
 char	*get_key(char *str);
 void	print_export(char *str);
+int		export_no_args(t_minish *minish);
 
 // --- Signals --- //
 void	handle_sigint(int sig);
